@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Rancho UK - ERP Avicultura</title>
   
+  <!-- Ícone do Aplicativo no iPhone (Apple Touch Icon) -->
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="icon" href="logo.png">
+
   <!-- SDKs DO FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -133,8 +137,8 @@
       <h2>RANCHO UK</h2>
       <p style="font-size:0.8rem; color:#6b7280; margin-bottom: 20px;">Painel Nuvem & Sincronizado</p>
       <form onsubmit="autenticar(event)">
-        <div class="form-group"><label>Usuário</label><input type="text" id="login-user" placeholder="admin ou vendedor" required></div>
-        <div class="form-group"><label>Senha</label><input type="password" id="login-pass" placeholder="1234" required></div>
+        <div class="form-group"><label>Usuário</label><input type="text" id="login-user" placeholder="Seu usuário" required></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="login-pass" placeholder="Sua senha" required></div>
         <button type="submit" class="btn" style="margin-top:10px;">Entrar no Sistema</button>
       </form>
     </div>
@@ -151,7 +155,7 @@
         <button class="grid-btn" type="button" onclick="navTo('clientes')"><span class="icon">👥</span><span class="label">CLIENTES</span></button>
         <button class="grid-btn" type="button" onclick="navTo('produtos')"><span class="icon">📦</span><span class="label">ESTOQUE</span></button>
         <button class="grid-btn admin-only" type="button" onclick="navTo('usuarios')"><span class="icon">🔑</span><span class="label">USUÁRIOS</span></button>
-        <button class="grid-btn admin-only" type="button" onclick="navTo('empresa')"><span class="icon">⚙</span><span class="label">EMPRESA / BACKUP</span></button>
+        <button class="grid-btn admin-only" type="button" onclick="navTo('empresa')"><span class="icon">⚙</span><span class="label">EMPRESA / ALTERAR SENHA</span></button>
       </div>
 
       <div class="card" style="margin-top: 15px;">
@@ -328,13 +332,21 @@
       </div>
     </div>
 
-    <!-- TELA: EMPRESA / BACKUP -->
+    <!-- TELA: EMPRESA & MINHA SENHA -->
     <div id="view-empresa" class="view-content" style="display:none;">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">Dados da Empresa (Rodapé da Nota)</div>
+          <div class="card-title">🔒 Alterar Minha Senha</div>
           <button class="btn btn-back" type="button" onclick="navTo('dashboard')">🏠 Início</button>
         </div>
+        <form onsubmit="alterarMinhaSenha(event)">
+          <div class="form-group"><label>Nova Senha</label><input type="password" id="minha-nova-senha" placeholder="Digite a nova senha" required></div>
+          <button type="submit" class="btn" style="background:var(--warning);">Atualizar Minha Senha</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Dados da Empresa (Rodapé da Nota)</div>
         <form onsubmit="salvarEmpresa(event)">
           <div class="form-group"><label>Nome Fantasia</label><input type="text" id="emp-nome" required></div>
           <div class="form-group"><label>CNPJ / CPF</label><input type="text" id="emp-cnpj" required></div>
@@ -491,7 +503,7 @@
         document.querySelectorAll('.admin-only').forEach(el => el.style.display = found.role === 'admin' ? 'flex' : 'none');
         navTo('dashboard');
       } else {
-        alert('Usuário ou senha incorretos!\n\nAcesso padrão inicial:\nUsuário: admin | Senha: 1234');
+        alert('Usuário ou senha incorretos! Verifique os seus dados de acesso.');
       }
     }
 
@@ -508,6 +520,22 @@
       document.querySelectorAll('.view-content').forEach(v => v.style.display = 'none');
       if (screen === 'dashboard') document.getElementById('view-dashboard').style.display = 'block';
       else document.getElementById(`view-${screen}`).style.display = 'block';
+    }
+
+    function alterarMinhaSenha(e) {
+      e.preventDefault();
+      const novaSenha = document.getElementById('minha-nova-senha').value.trim();
+      if (!novaSenha) return alert('Por favor, introduza uma nova senha.');
+
+      if (state.currentUser) {
+        db.collection("usuarios").doc(state.currentUser.id || state.currentUser.login).update({
+          pass: novaSenha
+        }).then(() => {
+          state.currentUser.pass = novaSenha;
+          alert('Senha alterada com sucesso!');
+          document.getElementById('minha-nova-senha').value = '';
+        }).catch(err => alert('Erro ao mudar a senha: ' + err.message));
+      }
     }
 
     // --- CLIENTES ---

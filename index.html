@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#556b2f">
-  <title>Rancho UK - ERP Avicultura</title>
+  <meta name="theme-color" content="#0f172a">
+  <title>Rancho UK - ERP Tech Avicultura</title>
   
   <!-- Ícone do Aplicativo no iPhone (Apple Touch Icon) -->
   <link rel="apple-touch-icon" href="logo.png">
@@ -16,98 +16,105 @@
 
   <style>
     :root {
-      --primary: #556b2f;
-      --primary-dark: #3b4a20;
-      --accent: #d4af37;
-      --bg: #e5e7eb;
+      --primary: #1e293b;
+      --primary-dark: #0f172a;
+      --accent: #2563eb;
+      --accent-light: #3b82f6;
+      --bg: #f1f5f9;
       --card: #ffffff;
-      --text: #1f2937;
-      --text-muted: #6b7280;
-      --border: #d1d5db;
-      --danger: #dc2626;
-      --success: #16a34a;
-      --warning: #d97706;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --danger: #ef4444;
+      --success: #10b981;
+      --warning: #f59e0b;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 30px; }
 
     header {
-      background: var(--primary); color: white; padding: 12px 16px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 14px 18px;
       display: flex; justify-content: space-between; align-items: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(15,23,42,0.25);
+      border-bottom: 2px solid var(--accent);
     }
-    .brand h1 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+    .brand h1 { font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
     .user-info { font-size: 0.8rem; display: flex; align-items: center; gap: 10px; }
-    .btn-logout { background: rgba(0,0,0,0.25); border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+    .btn-logout { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
+    .btn-logout:hover { background: var(--danger); border-color: var(--danger); }
 
-    main { max-width: 550px; margin: 20px auto; padding: 0 12px; }
+    main { max-width: 580px; margin: 20px auto; padding: 0 12px; }
 
     .login-card {
-      background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      max-width: 380px; margin: 40px auto; text-align: center;
+      background: white; padding: 30px 25px; border-radius: 14px; box-shadow: 0 10px 25px rgba(15,23,42,0.12);
+      max-width: 380px; margin: 50px auto; text-align: center; border: 1px solid var(--border);
     }
-    .login-card h2 { color: var(--primary-dark); margin-bottom: 6px; font-size: 1.4rem; }
+    .login-card h2 { color: var(--primary-dark); margin-bottom: 6px; font-size: 1.5rem; font-weight: 800; }
 
+    /* GRID MENU REORGANIZADO */
     .grid-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
     .grid-btn {
-      background: var(--primary); color: white; border: none; border-radius: 8px;
-      padding: 22px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 8px; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.12); transition: all 0.15s ease;
+      background: linear-gradient(145deg, #1e293b, #0f172a); color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+      padding: 20px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(15,23,42,0.15); transition: all 0.2s ease;
     }
     .grid-btn:active { transform: scale(0.97); background: var(--primary-dark); }
-    .grid-btn .icon { font-size: 2.2rem; }
-    .grid-btn .label { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .grid-btn.full-width { grid-column: span 2; background: #485c28; }
-    .grid-btn.resumo-btn { background: #15803d; }
+    .grid-btn .icon { font-size: 2rem; }
+    .grid-btn .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
+    .grid-btn.full-width { grid-column: span 2; background: linear-gradient(145deg, #2563eb, #1d4ed8); border-color: var(--accent-light); }
 
-    .card { background: white; border-radius: 10px; padding: 18px; border: 1px solid var(--border); margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
-    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--bg); padding-bottom: 8px; }
-    .card-title { font-size: 1rem; font-weight: 700; color: var(--primary-dark); }
+    .card { background: white; border-radius: 12px; padding: 18px; border: 1px solid var(--border); margin-bottom: 15px; box-shadow: 0 2px 8px rgba(15,23,42,0.05); }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
+    .card-title { font-size: 1rem; font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 6px; }
     
     .form-group { margin-bottom: 12px; text-align: left; }
-    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; color: var(--text-muted); }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: var(--text-muted); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 11px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; background: #f8fafc; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--accent); outline: none; background: #fff; }
 
-    .btn { background: var(--primary); color: white; border: none; padding: 11px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; font-size: 0.9rem; text-align: center; text-decoration: none; display: inline-block; }
-    .btn-back { background: #4b5563; padding: 6px 12px; width: auto; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; }
-    .btn-danger { background: var(--danger); width: auto; padding: 4px 8px; font-size: 0.75rem; border: none; color: white; border-radius: 4px; cursor: pointer; }
-    .btn-warning { background: var(--warning); width: auto; padding: 4px 8px; font-size: 0.75rem; border: none; color: white; border-radius: 4px; cursor: pointer; }
+    .btn { background: var(--accent); color: white; border: none; padding: 12px 14px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 0.9rem; text-align: center; text-decoration: none; display: inline-block; transition: 0.2s; }
+    .btn:hover { background: var(--accent-light); }
+    .btn-back { background: #475569; padding: 6px 12px; width: auto; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; }
+    .btn-danger { background: var(--danger); width: auto; padding: 5px 10px; font-size: 0.75rem; border: none; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    .btn-warning { background: var(--warning); width: auto; padding: 5px 10px; font-size: 0.75rem; border: none; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-    .badge { padding: 3px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; cursor: pointer; display: inline-block; }
-    .badge-pago { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-    .badge-pendente { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
-    .badge-cancelado { background: #f3f4f6; color: #4b5563; border: 1px solid #d1d5db; }
+    .badge { padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; cursor: pointer; display: inline-block; }
+    .badge-pago { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+    .badge-pendente { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .badge-cancelado { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
 
     table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
-    th, td { text-align: left; padding: 10px 6px; border-bottom: 1px solid var(--border); word-break: break-word; }
-    th { background: #f3f4f6; color: var(--text-muted); }
+    th, td { text-align: left; padding: 10px 6px; border-bottom: 1px solid #e2e8f0; word-break: break-word; }
+    th { background: #f8fafc; color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 0.75rem; }
 
-    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 1000; }
-    .modal-content { background: white; width: 92%; max-width: 480px; border-radius: 10px; padding: 20px; max-height: 90vh; overflow-y: auto; }
+    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(15,23,42,0.7); align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(3px); }
+    .modal-content { background: white; width: 92%; max-width: 480px; border-radius: 12px; padding: 22px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
     
     .receipt-box { 
       border: 1px dashed #000; 
       padding: 16px; 
       font-family: 'Courier New', monospace; 
       font-size: 0.85rem; 
-      background: #fefce8; 
+      background: #fff; 
       margin-bottom: 12px; 
       color: #000;
-      text-align: justify;
+      text-align: left;
       width: 100%;
       word-wrap: break-word;
     }
 
-    .carrinho-box { background: #f9fafb; border: 1px dashed var(--border); border-radius: 8px; padding: 10px; margin-bottom: 15px; }
-    .carrinho-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dotted #d1d5db; padding: 6px 0; font-size: 0.85rem; }
+    .carrinho-box { background: #f8fafc; border: 1px dashed var(--border); border-radius: 8px; padding: 12px; margin-bottom: 15px; }
+    .carrinho-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dotted #cbd5e1; padding: 6px 0; font-size: 0.85rem; }
 
-    .stat-card { background: #f3f4f6; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+    .stat-card { background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e2e8f0; }
     .stat-title { font-size: 0.75rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; }
-    .stat-value { font-size: 1.3rem; font-weight: bold; color: var(--primary-dark); }
+    .stat-value { font-size: 1.3rem; font-weight: bold; color: var(--accent); }
 
+    /* ESTILO EXCLUSIVO IMPRESSÃO DO RECIBO */
     @media print {
       body * { visibility: hidden; }
+      #modal-nota, #modal-nota * { visibility: visible; }
       #printable-receipt, #printable-receipt * { visibility: visible; }
       #printable-receipt { 
         position: absolute; 
@@ -117,7 +124,12 @@
         border: none; 
         padding: 0;
         margin: 0;
+        text-align: left !important;
+        font-size: 11pt;
       }
+      .modal-content { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+      .modal { position: absolute; left: 0; top: 0; background: none; }
+      .modal button { display: none !important; }
     }
   </style>
 </head>
@@ -125,7 +137,7 @@
 
   <!-- CABEÇALHO -->
   <header id="app-header" style="display:none;">
-    <div class="brand"><span id="header-title">🛒 RANCHO UK</span></div>
+    <div class="brand"><span id="header-title">⚡ RANCHO UK</span></div>
     <div class="user-info">
       <span id="user-display">👤 Admin</span>
       <button class="btn-logout" type="button" onclick="logout()">Sair</button>
@@ -136,7 +148,7 @@
     <!-- TELA DE LOGIN -->
     <div id="view-login" class="login-card">
       <h2>RANCHO UK</h2>
-      <p style="font-size:0.8rem; color:#6b7280; margin-bottom: 20px;">Painel Nuvem & Sincronizado</p>
+      <p style="font-size:0.8rem; color:#64748b; margin-bottom: 25px;">Sistema Inteligente de Avicultura</p>
       <form onsubmit="autenticar(event)">
         <div class="form-group"><label>Usuário</label><input type="text" id="login-user" placeholder="Seu usuário" required autocomplete="username"></div>
         <div class="form-group"><label>Senha</label><input type="password" id="login-pass" placeholder="Sua senha" required autocomplete="current-password"></div>
@@ -150,18 +162,18 @@
         <button class="grid-btn full-width" type="button" onclick="navTo('pedidos')">
           <span class="icon">🛒</span><span class="label">NOVO PEDIDO / VENDAS</span>
         </button>
-        <button class="grid-btn resumo-btn full-width" type="button" onclick="abrirResumoVendasDia()">
-          <span class="icon">📊</span><span class="label">RESUMO DE VENDAS DO DIA</span>
-        </button>
         <button class="grid-btn" type="button" onclick="navTo('clientes')"><span class="icon">👥</span><span class="label">CLIENTES</span></button>
         <button class="grid-btn" type="button" onclick="navTo('produtos')"><span class="icon">📦</span><span class="label">ESTOQUE</span></button>
         <button class="grid-btn admin-only" type="button" onclick="navTo('usuarios')"><span class="icon">🔑</span><span class="label">USUÁRIOS</span></button>
-        <button class="grid-btn admin-only" type="button" onclick="navTo('empresa')"><span class="icon">⚙</span><span class="label">EMPRESA / ALTERAR SENHA</span></button>
+        <button class="grid-btn admin-only" type="button" onclick="navTo('empresa')"><span class="icon">⚙️</span><span class="label">EMPRESA</span></button>
+        <button class="grid-btn full-width" type="button" style="background: linear-gradient(145deg, #0f172a, #1e293b);" onclick="abrirResumoVendasDia()">
+          <span class="icon">📊</span><span class="label">RESUMO DE VENDAS DO DIA</span>
+        </button>
       </div>
 
       <div class="card" style="margin-top: 15px;">
         <div class="card-header">
-          <div class="card-title">📋 Lista Rápida de Clientes</div>
+          <div class="card-title">📋 Busca Rápida de Clientes</div>
           <button class="btn btn-back" type="button" onclick="navTo('clientes')">➕ Cadastrar</button>
         </div>
         <div class="form-group" style="margin-bottom: 10px;">
@@ -218,7 +230,7 @@
 
           <hr style="margin: 12px 0; border: none; border-top: 1px solid var(--border);">
 
-          <div style="background: #f3f4f6; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 12px; border:1px solid #e2e8f0;">
             <div class="form-group">
               <label>Selecione o Produto</label>
               <select id="ped-produto"></select>
@@ -234,8 +246,8 @@
 
           <div class="carrinho-box">
             <div style="font-size: 0.8rem; font-weight: bold; color: var(--text-muted); margin-bottom: 6px;">🛍️ ITENS SELECIONADOS:</div>
-            <div id="itens-pedido-lista"><div style="font-size:0.8rem; color:#6b7280; text-align:center; padding:10px;">Nenhum produto adicionado.</div></div>
-            <div style="font-size: 0.95rem; font-weight: bold; text-align: right; margin-top: 10px; color: var(--primary-dark);">Total: R$ <span id="ped-total-valor">0.00</span></div>
+            <div id="itens-pedido-lista"><div style="font-size:0.8rem; color:#64748b; text-align:center; padding:10px;">Nenhum produto adicionado.</div></div>
+            <div style="font-size: 1rem; font-weight: bold; text-align: right; margin-top: 10px; color: var(--accent);">Total: R$ <span id="ped-total-valor">0.00</span></div>
           </div>
 
           <div class="form-group">
@@ -249,7 +261,7 @@
           </div>
 
           <div class="form-group">
-            <label>Dados do Pagamento (Opcional - Ex: Chave Pix, Banco/Agência)</label>
+            <label>Dados do Pagamento (Opcional)</label>
             <input type="text" id="ped-dados-pagamento" placeholder="Ex: Chave Pix ou Banco">
           </div>
 
@@ -279,22 +291,52 @@
       </div>
     </div>
 
-    <!-- TELA: PRODUTOS / ESTOQUE -->
+    <!-- TELA: PRODUTOS / ESTOQUE & ENTRADA DE PRODUÇÃO -->
     <div id="view-produtos" class="view-content" style="display:none;">
+      <!-- SEÇÃO ENTRADA DE PRODUÇÃO DIÁRIA -->
+      <div class="card" style="border-left: 4px solid var(--accent);">
+        <div class="card-header">
+          <div class="card-title">🥚 Registrar Entrada de Produção (Diário)</div>
+          <button class="btn btn-back" type="button" onclick="navTo('dashboard')">🏠 Início</button>
+        </div>
+        <form onsubmit="registrarEntradaProducao(event)">
+          <div class="form-group">
+            <label>Selecione o Item Produzido</label>
+            <select id="prod-ent-item" required></select>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <div class="form-group" style="flex:1;">
+              <label>Quantidade Coletada/Produzida</label>
+              <input type="number" id="prod-ent-qtd" min="1" placeholder="Ex: 50 ou 100" required>
+            </div>
+          </div>
+          <button type="submit" class="btn" style="background:var(--accent);">➕ Lançar Coleta de Produção</button>
+        </form>
+
+        <div style="margin-top: 15px;">
+          <div style="font-size:0.75rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase;">Histórico de Produção de Hoje</div>
+          <table>
+            <thead><tr><th>Hora</th><th>Item</th><th>Qtd</th></tr></thead>
+            <tbody id="lista-producao-hoje"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CADASTRAR / EDITAR PRODUTO -->
       <div class="card">
         <div class="card-header">
-          <div class="card-title" id="form-prod-title">Cadastrar Produto</div>
-          <button class="btn btn-back" type="button" onclick="navTo('dashboard')">🏠 Início</button>
+          <div class="card-title" id="form-prod-title">Cadastrar Novo Produto</div>
         </div>
         <form id="form-produto" onsubmit="salvarProduto(event)">
           <input type="hidden" id="prod-id-edit" value="">
           <div class="form-group"><label>Descrição do Item</label><input type="text" id="prod-nome" placeholder="Ex: Ovos Dúzia / Cartela 30" required></div>
           <div class="form-group"><label>Preço Unitário (R$)</label><input type="number" step="0.01" id="prod-preco" required></div>
-          <div class="form-group"><label>Estoque Atual</label><input type="number" id="prod-qtd" required></div>
+          <div class="form-group"><label>Estoque Inicial/Atual</label><input type="number" id="prod-qtd" required></div>
           <button type="submit" class="btn" id="btn-salvar-prod">Salvar Produto na Nuvem</button>
-          <button type="button" class="btn" id="btn-cancelar-edit" style="background:#6b7280; margin-top:6px; display:none;" onclick="limparFormProduto()">Cancelar Edição</button>
+          <button type="button" class="btn" id="btn-cancelar-edit" style="background:#64748b; margin-top:6px; display:none;" onclick="limparFormProduto()">Cancelar Edição</button>
         </form>
       </div>
+
       <div class="card">
         <div class="card-title">Estoque Atual</div>
         <table>
@@ -372,9 +414,9 @@
       <div class="receipt-box" id="printable-receipt"></div>
       <div style="display:flex; gap:8px;">
         <button class="btn" type="button" style="background:#2563eb;" onclick="window.print()">📄 Imprimir / PDF</button>
-        <button class="btn" type="button" style="background:#16a34a;" onclick="enviarWhats()">💬 WhatsApp</button>
+        <button class="btn" type="button" style="background:#10b981;" onclick="enviarWhats()">💬 WhatsApp</button>
       </div>
-      <button class="btn" type="button" onclick="document.getElementById('modal-nota').style.display='none'" style="background:#6b7280; margin-top:8px;">Fechar Nota</button>
+      <button class="btn" type="button" onclick="document.getElementById('modal-nota').style.display='none'" style="background:#64748b; margin-top:8px;">Fechar Nota</button>
     </div>
   </div>
 
@@ -413,7 +455,7 @@
         </table>
       </div>
 
-      <button class="btn" type="button" onclick="document.getElementById('modal-resumo').style.display='none'" style="background:#6b7280; margin-top:15px;">Fechar Resumo</button>
+      <button class="btn" type="button" onclick="document.getElementById('modal-resumo').style.display='none'" style="background:#64748b; margin-top:15px;">Fechar Resumo</button>
     </div>
   </div>
 
@@ -438,6 +480,7 @@
       produtos: [],
       clientes: [],
       pedidos: [],
+      producao: [],
       currentUser: null,
       pedidoAtual: null
     };
@@ -469,6 +512,11 @@
         }
         render();
       }, err => console.error("Erro usuarios:", err));
+
+      db.collection("producao").orderBy("dataHora", "desc").limit(50).onSnapshot(snapshot => {
+        state.producao = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        renderProducaoHoje();
+      }, err => console.error("Erro producao:", err));
 
       db.collection("config").doc("empresa").onSnapshot(doc => {
         if (doc.exists) {
@@ -531,13 +579,21 @@
 
       if (state.currentUser) {
         const docId = state.currentUser.id || state.currentUser.login;
-        db.collection("usuarios").doc(docId).update({
-          pass: novaSenha
-        }).then(() => {
+        db.collection("usuarios").doc(docId).update({ pass: novaSenha })
+        .then(() => {
           state.currentUser.pass = novaSenha;
-          alert('Senha alterada com sucesso!');
+          alert('Sua senha foi alterada com sucesso!');
           document.getElementById('minha-nova-senha').value = '';
         }).catch(err => alert('Erro ao mudar a senha: ' + err.message));
+      }
+    }
+
+    function alterarSenhaUsuario(docId, login) {
+      const novaSenha = prompt(`Digite a nova senha para o usuário ${login.toUpperCase()}:`);
+      if (novaSenha && novaSenha.trim() !== '') {
+        db.collection("usuarios").doc(docId).update({ pass: novaSenha.trim() })
+          .then(() => alert(`Senha do usuário ${login} alterada com sucesso!`))
+          .catch(err => alert('Erro ao alterar senha: ' + err.message));
       }
     }
 
@@ -550,10 +606,7 @@
       const end = document.getElementById('cli-end').value.trim();
 
       db.collection("clientes").add({ nome, doc, tel, end })
-        .then(() => {
-          alert('Cliente gravado na Nuvem!');
-          e.target.reset();
-        })
+        .then(() => { alert('Cliente gravado na Nuvem!'); e.target.reset(); })
         .catch(err => alert('Erro ao salvar cliente: ' + err.message));
     }
 
@@ -586,11 +639,11 @@
         (c.doc && c.doc.toLowerCase().includes(termo)) || 
         (c.tel && c.tel.includes(termo))
       );
-      if (filtrados.length === 0) tbody.innerHTML = '<tr><td colspan="2" style="text-align:center; color:#6b7280;">Nenhum cliente encontrado</td></tr>';
-      else tbody.innerHTML = filtrados.map(c => `<tr><td><b>${c.nome}</b><br><small style="color:#6b7280;">${c.doc || 'Sem doc'}</small></td><td>${c.tel}</td></tr>`).join('');
+      if (filtrados.length === 0) tbody.innerHTML = '<tr><td colspan="2" style="text-align:center; color:#64748b;">Nenhum cliente encontrado</td></tr>';
+      else tbody.innerHTML = filtrados.map(c => `<tr><td><b>${c.nome}</b><br><small style="color:#64748b;">${c.doc || 'Sem doc'}</small></td><td>${c.tel}</td></tr>`).join('');
     }
 
-    // --- PRODUTOS ---
+    // --- PRODUTOS & PRODUÇÃO DIÁRIA ---
     function salvarProduto(e) {
       e.preventDefault();
       const idEdit = document.getElementById('prod-id-edit').value;
@@ -610,6 +663,62 @@
       limparFormProduto();
     }
 
+    function registrarEntradaProducao(e) {
+      e.preventDefault();
+      const prodId = document.getElementById('prod-ent-item').value;
+      const qtd = parseInt(document.getElementById('prod-ent-qtd').value) || 0;
+
+      if (!prodId || qtd <= 0) return alert('Selecione um item e digite uma quantidade válida.');
+
+      const prod = state.produtos.find(p => p.id === prodId);
+      if (!prod) return alert('Produto não encontrado.');
+
+      // Incrementa o estoque no produto
+      db.collection("produtos").doc(prodId).update({
+        qtd: firebase.firestore.FieldValue.increment(qtd)
+      }).then(() => {
+        // Registra o lançamento de produção
+        return db.collection("producao").add({
+          prodId: prod.id,
+          nomeItem: prod.nome,
+          qtd: qtd,
+          dataHora: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }).then(() => {
+        alert(`Entrada de ${qtd} un para "${prod.nome}" registrada com sucesso!`);
+        document.getElementById('prod-ent-qtd').value = '';
+      }).catch(err => alert('Erro ao registrar entrada: ' + err.message));
+    }
+
+    function renderProducaoHoje() {
+      const tbody = document.getElementById('lista-producao-hoje');
+      if (!tbody) return;
+
+      const hoje = new Date();
+      const inicioHoje = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+
+      const lancamentosHoje = state.producao.filter(item => {
+        if (!item.dataHora) return false;
+        const d = item.dataHora.toDate ? item.dataHora.toDate() : new Date(item.dataHora);
+        return d >= inicioHoje;
+      });
+
+      if (lancamentosHoje.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#64748b;">Nenhuma entrada registrada hoje.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = lancamentosHoje.map(item => {
+        const d = item.dataHora.toDate ? item.dataHora.toDate() : new Date();
+        const horaStr = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        return `<tr>
+          <td><b>${horaStr}</b></td>
+          <td>${item.nomeItem}</td>
+          <td><b style="color:var(--success);">+${item.qtd}</b></td>
+        </tr>`;
+      }).join('');
+    }
+
     function prepararEdicaoProduto(id) {
       const prod = state.produtos.find(p => p.id === id);
       if (!prod) return;
@@ -625,8 +734,8 @@
     function limparFormProduto() {
       document.getElementById('prod-id-edit').value = '';
       document.getElementById('form-produto').reset();
-      document.getElementById('form-prod-title').innerText = 'Cadastrar Produto';
-      document.getElementById('btn-salvar-prod').innerText = 'Salvar Produto';
+      document.getElementById('form-prod-title').innerText = 'Cadastrar Novo Produto';
+      document.getElementById('btn-salvar-prod').innerText = 'Salvar Produto na Nuvem';
       document.getElementById('btn-cancelar-edit').style.display = 'none';
     }
 
@@ -662,7 +771,7 @@
       const container = document.getElementById('itens-pedido-lista');
       const totalSpan = document.getElementById('ped-total-valor');
       if (carrinhoTemp.length === 0) {
-        container.innerHTML = '<div style="font-size:0.8rem; color:#6b7280; text-align:center; padding:10px;">Nenhum produto adicionado.</div>';
+        container.innerHTML = '<div style="font-size:0.8rem; color:#64748b; text-align:center; padding:10px;">Nenhum produto adicionado.</div>';
         totalSpan.innerText = '0.00';
         return;
       }
@@ -670,7 +779,7 @@
       container.innerHTML = carrinhoTemp.map((item, index) => {
         total += item.subtotal;
         return `<div class="carrinho-item">
-            <div><b>${item.qtd}x</b> ${item.nome}<br><small style="color:#6b7280;">R$ ${item.preco.toFixed(2)} un = R$ ${item.subtotal.toFixed(2)}</small></div>
+            <div><b>${item.qtd}x</b> ${item.nome}<br><small style="color:#64748b;">R$ ${item.preco.toFixed(2)} un = R$ ${item.subtotal.toFixed(2)}</small></div>
             <button type="button" class="btn-danger" onclick="removerItemCarrinho(${index})">🗑</button>
           </div>`;
       }).join('');
@@ -824,13 +933,13 @@
 
       let formasHtml = Object.keys(porForma).length > 0 
         ? Object.entries(porForma).map(([forma, val]) => `• <b>${forma}:</b> R$ ${val.toFixed(2)}`).join('<br>')
-        : '<span style="color:#6b7280;">Nenhuma venda registrada hoje.</span>';
+        : '<span style="color:#64748b;">Nenhuma venda registrada hoje.</span>';
       
       document.getElementById('resumo-detalhe-formas').innerHTML = formasHtml;
 
       const tbody = document.getElementById('resumo-tabela-hoje');
       if (pedidosHoje.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#6b7280;">Nenhuma venda hoje</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#64748b;">Nenhuma venda hoje</td></tr>';
       } else {
         tbody.innerHTML = pedidosHoje.map(p => `
           <tr>
@@ -849,7 +958,7 @@
     function render() {
       document.getElementById('lista-clientes').innerHTML = state.clientes.map(c => `
         <tr>
-          <td><b>${c.nome}</b><br><small style="color:#6b7280;">Doc: ${c.doc || 'Não informado'}</small></td>
+          <td><b>${c.nome}</b><br><small style="color:#64748b;">Doc: ${c.doc || 'Não informado'}</small></td>
           <td>${c.tel}</td>
           <td><button class="btn-danger" type="button" onclick="excluirCliente('${c.id}')">🗑️</button></td>
         </tr>`).join('');
@@ -860,7 +969,7 @@
           <td>R$ ${Number(p.preco).toFixed(2)}</td>
           <td><b>${p.qtd}</b></td>
           <td>
-            <button class="btn-warning" type="button" onclick="prepararEdicaoProduto('${p.id}')">✏</button>
+            <button class="btn-warning" type="button" onclick="prepararEdicaoProduto('${p.id}')">✏️</button>
             <button class="btn-danger" type="button" onclick="excluirProduto('${p.id}')">🗑️</button>
           </td>
         </tr>`).join('');
@@ -884,19 +993,32 @@
         </tr>`;
       }).join('');
 
-      document.getElementById('lista-usuarios').innerHTML = state.usuarios.map(u => `
-        <tr><td><b>${u.login}</b></td><td>${u.role}</td><td>${u.login !== 'admin' ? `<button class="btn-danger" type="button" onclick="excluirUsuario('${u.id || u.login}')">🗑</button>` : '-'}</td></tr>`).join('');
+      document.getElementById('lista-usuarios').innerHTML = state.usuarios.map(u => {
+        const uId = u.id || u.login;
+        return `
+        <tr>
+          <td><b>${u.login}</b></td>
+          <td>${u.role}</td>
+          <td>
+            <button class="btn-warning" type="button" title="Alterar Senha" onclick="alterarSenhaUsuario('${uId}', '${u.login}')">🔑</button>
+            ${u.login !== 'admin' ? `<button class="btn-danger" type="button" onclick="excluirUsuario('${uId}')">🗑</button>` : ''}
+          </td>
+        </tr>`;
+      }).join('');
 
       filtrarClientesDropdown();
       renderClientesDashboard();
       
-      // Filtrar apenas produtos com estoque > 0 para o select de pedidos
-      document.getElementById('ped-produto').innerHTML = state.produtos.map(p => 
+      // Opções no SELECT do Pedido e no SELECT da Produção
+      const prodOptions = state.produtos.map(p => 
         `<option value="${p.id}" ${p.qtd <= 0 ? 'disabled' : ''}>${p.nome} - R$ ${Number(p.preco).toFixed(2)} (${p.qtd <= 0 ? 'SEM ESTOQUE' : 'Estoque: ' + p.qtd})</option>`
       ).join('');
+
+      document.getElementById('ped-produto').innerHTML = prodOptions;
+      document.getElementById('prod-ent-item').innerHTML = state.produtos.map(p => `<option value="${p.id}">${p.nome} (Atual: ${p.qtd})</option>`).join('');
     }
 
-    // --- COMPROVANTE DE PEDIDO ---
+    // --- COMPROVANTE DE PEDIDO (IMPRESSÃO AJUSTADA NO TOPO) ---
     function verNota(id) {
       const p = state.pedidos.find(i => i.id === id);
       if(!p) return;
@@ -907,7 +1029,7 @@
       if (p.status === 'Cancelado') statusTag = '[⚪ PEDIDO CANCELADO]';
 
       let listaItensTxt = p.itens ? p.itens.map(i => `
-        <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
           <span>${i.qtd}x ${i.nome}</span>
           <span>R$ ${Number(i.subtotal).toFixed(2)}</span>
         </div>
@@ -916,10 +1038,10 @@
       let obsHtml = p.obs ? `<b>OBSERVAÇÕES:</b><br>${p.obs}<br>--------------------------------------------------<br>` : '';
 
       document.getElementById('printable-receipt').innerHTML = `
-        <div style="text-align:center;">
-          <b>${(state.empresa.nome || 'RANCHO UK').toUpperCase()}</b><br>
-          CNPJ: ${state.empresa.cnpj || '-'}<br>
-          ${state.empresa.tel || ''}
+        <div style="text-align:center; margin-bottom:8px;">
+          <b style="font-size:1.1rem;">${(state.empresa.nome || 'RANCHO UK').toUpperCase()}</b><br>
+          CNPJ/CPF: ${state.empresa.cnpj || '-'}<br>
+          Tel/Whats: ${state.empresa.tel || ''}
         </div>
         --------------------------------------------------<br>
         <b>COMPROVANTE DE PEDIDO #${p.numPedido || ''}</b><br>
@@ -930,13 +1052,13 @@
         <b>ITENS DO PEDIDO:</b><br>
         ${listaItensTxt}
         --------------------------------------------------<br>
-        <div style="display:flex; justify-content:space-between;"><b>VALOR TOTAL:</b><b>R$ ${Number(p.total).toFixed(2)}</b></div>
+        <div style="display:flex; justify-content:space-between; font-size:1rem;"><b>VALOR TOTAL:</b><b>R$ ${Number(p.total).toFixed(2)}</b></div>
         <b>FORMA DE PGTO:</b> ${p.formaPagamento || 'Pix'}<br>
         <b>DADOS PGTO:</b> ${p.dadosPagamento || state.empresa.pix}<br>
         <b>SITUAÇÃO:</b> ${statusTag}<br>
         --------------------------------------------------<br>
         ${obsHtml}
-        <div style="text-align:center; font-size: 0.75rem; margin-top: 8px;">
+        <div style="text-align:center; font-size: 0.75rem; margin-top: 10px;">
           <b>${state.empresa.nome}</b><br>
           📍 ${state.empresa.end}<br>
           🌐 ${state.empresa.social}<br>

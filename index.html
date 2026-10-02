@@ -301,14 +301,8 @@
         </div>
         <form onsubmit="registrarEntradaProducao(event)">
           <div class="form-group">
-            <label>Selecione o Item Produzido</label>
-            <select id="prod-ent-item" required></select>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <div class="form-group" style="flex:1;">
-              <label>Quantidade Coletada/Produzida</label>
-              <input type="number" id="prod-ent-qtd" min="1" placeholder="Ex: 50 ou 100" required>
-            </div>
+            <label>Quantidade Coletada/Produzida</label>
+            <input type="number" id="prod-ent-qtd" min="1" placeholder="Ex: 50 ou 100" required>
           </div>
           <button type="submit" class="btn" style="background:var(--accent);">➕ Lançar Coleta de Produção</button>
         </form>
@@ -665,16 +659,19 @@
 
     function registrarEntradaProducao(e) {
       e.preventDefault();
-      const prodId = document.getElementById('prod-ent-item').value;
       const qtd = parseInt(document.getElementById('prod-ent-qtd').value) || 0;
 
-      if (!prodId || qtd <= 0) return alert('Selecione um item e digite uma quantidade válida.');
+      if (qtd <= 0) return alert('Digite uma quantidade válida.');
 
-      const prod = state.produtos.find(p => p.id === prodId);
-      if (!prod) return alert('Produto não encontrado.');
+      if (state.produtos.length === 0) {
+        return alert('Nenhum produto cadastrado no estoque para receber a produção.');
+      }
+
+      // Seleciona automaticamente o primeiro produto da lista (ex: "Ovos")
+      const prod = state.produtos[0];
 
       // Incrementa o estoque no produto
-      db.collection("produtos").doc(prodId).update({
+      db.collection("produtos").doc(prod.id).update({
         qtd: firebase.firestore.FieldValue.increment(qtd)
       }).then(() => {
         // Registra o lançamento de produção
@@ -713,7 +710,7 @@
         const horaStr = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         return `<tr>
           <td><b>${horaStr}</b></td>
-          <td>${item.nomeItem}</td>
+          <td>${item.nomeItem || 'Ovos'}</td>
           <td><b style="color:var(--success);">+${item.qtd}</b></td>
         </tr>`;
       }).join('');
@@ -1009,13 +1006,12 @@
       filtrarClientesDropdown();
       renderClientesDashboard();
       
-      // Opções no SELECT do Pedido e no SELECT da Produção
+      // Opções no SELECT do Pedido
       const prodOptions = state.produtos.map(p => 
         `<option value="${p.id}" ${p.qtd <= 0 ? 'disabled' : ''}>${p.nome} - R$ ${Number(p.preco).toFixed(2)} (${p.qtd <= 0 ? 'SEM ESTOQUE' : 'Estoque: ' + p.qtd})</option>`
       ).join('');
 
       document.getElementById('ped-produto').innerHTML = prodOptions;
-      document.getElementById('prod-ent-item').innerHTML = state.produtos.map(p => `<option value="${p.id}">${p.nome} (Atual: ${p.qtd})</option>`).join('');
     }
 
     // --- COMPROVANTE DE PEDIDO (IMPRESSÃO AJUSTADA NO TOPO) ---

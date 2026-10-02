@@ -586,7 +586,12 @@
       const novaSenha = prompt(`Digite a nova senha para o usuário ${login.toUpperCase()}:`);
       if (novaSenha && novaSenha.trim() !== '') {
         db.collection("usuarios").doc(docId).update({ pass: novaSenha.trim() })
-          .then(() => alert(`Senha do usuário ${login} alterada com sucesso!`))
+          .then(() => {
+            alert(`Senha do usuário ${login} alterada com sucesso!`);
+            if (state.currentUser && (state.currentUser.id === docId || state.currentUser.login === login)) {
+              state.currentUser.pass = novaSenha.trim();
+            }
+          })
           .catch(err => alert('Erro ao alterar senha: ' + err.message));
       }
     }
@@ -889,8 +894,15 @@
     }
 
     function excluirUsuario(id) {
-      if (confirm(`Remover utilizador?`)) {
-        db.collection("usuarios").doc(id).delete().catch(err => alert('Erro ao excluir: ' + err.message));
+      if (confirm(`Tem certeza de que deseja remover o utilizador "${id}"?`)) {
+        db.collection("usuarios").doc(id).delete()
+          .then(() => {
+            alert('Usuário excluído com sucesso!');
+            if (state.currentUser && (state.currentUser.id === id || state.currentUser.login === id)) {
+              logout();
+            }
+          })
+          .catch(err => alert('Erro ao excluir: ' + err.message));
       }
     }
 
@@ -957,7 +969,7 @@
         <tr>
           <td><b>${c.nome}</b><br><small style="color:#64748b;">Doc: ${c.doc || 'Não informado'}</small></td>
           <td>${c.tel}</td>
-          <td><button class="btn-danger" type="button" onclick="excluirCliente('${c.id}')">🗑️</button></td>
+          <td><button class="btn-danger" type="button" onclick="excluirCliente('${c.id}')">🗑️️</button></td>
         </tr>`).join('');
 
       document.getElementById('lista-produtos').innerHTML = state.produtos.map(p => `
@@ -998,7 +1010,7 @@
           <td>${u.role}</td>
           <td>
             <button class="btn-warning" type="button" title="Alterar Senha" onclick="alterarSenhaUsuario('${uId}', '${u.login}')">🔑</button>
-            ${u.login !== 'admin' ? `<button class="btn-danger" type="button" onclick="excluirUsuario('${uId}')">🗑</button>` : ''}
+            <button class="btn-danger" type="button" title="Excluir Usuário" onclick="excluirUsuario('${uId}')">🗑</button>
           </td>
         </tr>`;
       }).join('');

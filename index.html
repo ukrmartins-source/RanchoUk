@@ -190,7 +190,7 @@
         <button class="grid-btn" type="button" onclick="navTo('clientes')"><span class="icon">👥</span><span class="label">CLIENTES</span></button>
         <button class="grid-btn" type="button" onclick="navTo('produtos')"><span class="icon">📦</span><span class="label">ESTOQUE</span></button>
         <button class="grid-btn admin-only" type="button" onclick="navTo('usuarios')"><span class="icon">🔑</span><span class="label">USUÁRIOS</span></button>
-        <button class="grid-btn admin-only" type="button" onclick="navTo('empresa')"><span class="icon">⚙️️</span><span class="label">EMPRESA</span></button>
+        <button class="grid-btn admin-only" type="button" onclick="navTo('empresa')"><span class="icon">⚙</span><span class="label">EMPRESA</span></button>
         <button class="grid-btn full-width" type="button" style="background: linear-gradient(145deg, #0f172a, #1e293b);" onclick="abrirResumoVendasDia()">
           <span class="icon">📊</span><span class="label">RESUMO DE VENDAS DO DIA</span>
         </button>
@@ -1022,7 +1022,7 @@
             </td>
             <td>
               <button class="btn" style="width:auto; padding:4px 8px; font-size:0.75rem; background:#2563eb; margin-bottom:2px;" onclick="abrirModalNota('${p.id}')">📄 Recibo</button>
-              <button class="btn-danger" title="Excluir Pedido" onclick="excluirPedido('${p.id}', ${p.numeroPedido})">🗑️</button>
+              <button class="btn-danger" title="Excluir Pedido" onclick="excluirPedido('${p.id}', ${p.numeroPedido || 0}, ${p.totalOvos || 0})">🗑️</button>
             </td>
           </tr>
         `;
@@ -1034,11 +1034,21 @@
       await db.collection("pedidos").doc(id).update({ status: novoStatus });
     }
 
-    async function excluirPedido(id, numero) {
-      if (!confirm(`Tem certeza que deseja excluir o Pedido #${numero || ''}?`)) return;
+    async function excluirPedido(id, numero, totalOvosDoPedido) {
+      if (!confirm(`Tem certeza que deseja excluir o Pedido #${numero || ''}? Os ovos deste pedido retornarão ao estoque.`)) return;
       try {
+        // Devolve os ovos ao estoque geral
+        const refEstoque = db.collection("estoque_geral").doc("saldo");
+        await db.runTransaction(async (transaction) => {
+          const doc = await transaction.get(refEstoque);
+          let atual = doc.exists ? (doc.data().qtdOvos || 0) : 0;
+          let devolucao = totalOvosDoPedido || 0;
+          transaction.set(refEstoque, { qtdOvos: atual + devolucao }, { merge: true });
+        });
+
+        // Apaga o pedido
         await db.collection("pedidos").doc(id).delete();
-        alert(`Pedido #${numero || ''} excluído com sucesso!`);
+        alert(`Pedido #${numero || ''} excluído e ${totalOvosDoPedido || 0} ovos repostos ao estoque com sucesso!`);
       } catch (err) {
         alert("Erro ao excluir o pedido: " + err.message);
       }

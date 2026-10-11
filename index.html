@@ -31,6 +31,7 @@
       --danger: #ef4444;
       --success: #10b981;
       --warning: #f59e0b;
+      --tech: #0d9488;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
@@ -46,6 +47,16 @@
     .user-info { font-size: 0.8rem; display: flex; align-items: center; gap: 10px; }
     .btn-logout { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
     .btn-logout:hover { background: var(--danger); border-color: var(--danger); }
+
+    /* ABAS FIXAS NO TOPO */
+    .top-nav-tabs {
+      display: flex; background: #0f172a; padding: 0 12px; gap: 6px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .top-tab-btn {
+      flex: 1; background: transparent; border: none; color: #94a3b8; padding: 12px 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; cursor: pointer; text-align: center; border-bottom: 3px solid transparent; transition: 0.2s;
+    }
+    .top-tab-btn.active { color: #ffffff; border-bottom-color: var(--accent-light); background: rgba(255,255,255,0.04); }
+    .top-tab-btn.tech-tab.active { border-bottom-color: var(--tech); color: #2dd4bf; }
 
     main { max-width: 580px; margin: 20px auto; padding: 0 12px; }
 
@@ -66,6 +77,9 @@
     .grid-btn .icon { font-size: 2rem; }
     .grid-btn .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
     .grid-btn.full-width { grid-column: span 2; background: linear-gradient(145deg, #2563eb, #1d4ed8); border-color: var(--accent-light); }
+    .grid-btn.tech-btn { grid-column: span 2; background: linear-gradient(145deg, #0d9488, #115e59); border-color: #2dd4bf; }
+    .grid-btn.tech-action { background: linear-gradient(145deg, #334155, #1e293b); }
+    .grid-btn.danger-action { background: linear-gradient(145deg, #7f1d1d, #450a0a); border-color: #f87171; }
 
     .card { background: white; border-radius: 12px; padding: 18px; border: 1px solid var(--border); margin-bottom: 15px; box-shadow: 0 2px 8px rgba(15,23,42,0.05); }
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
@@ -81,11 +95,14 @@
     .btn-back { background: #475569; padding: 6px 12px; width: auto; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; }
     .btn-danger { background: var(--danger); width: auto; padding: 5px 10px; font-size: 0.75rem; border: none; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; }
     .btn-warning { background: var(--warning); width: auto; padding: 5px 10px; font-size: 0.75rem; border: none; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    .btn-success { background: #10b981; color: white; }
+    .btn-tech { background: var(--tech); color: white; }
 
     .badge { padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; cursor: pointer; display: inline-block; }
     .badge-pago { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
     .badge-pendente { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
     .badge-cancelado { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .badge-ativo { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
 
     table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
     th, td { text-align: left; padding: 10px 6px; border-bottom: 1px solid #e2e8f0; word-break: break-word; }
@@ -121,6 +138,70 @@
     .stat-card { background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e2e8f0; }
     .stat-title { font-size: 0.75rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase; }
     .stat-value { font-size: 1.3rem; font-weight: bold; color: var(--accent); }
+
+    /* ESTILOS PARA RELATÓRIOS E IMPRESSÃO DE MÚLTIPLOS RECIBOS */
+    .recibo-bloco-metade {
+      width: 100%;
+      background: #ffffff;
+      border: 1px dashed #94a3b8;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .recibo-sheet-header {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 6px 10px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .item-linha-zebrado {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+    .item-linha-zebrado:nth-child(odd) { background-color: #f8fafc; }
+    .item-linha-zebrado:nth-child(even) { background-color: #ffffff; }
+
+    .relatorio-sheet-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px;
+      color: #0f172a;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .relatorio-sheet-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #2563eb;
+    }
+    .relatorio-kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
+    .relatorio-kpi-item { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; padding: 10px; border-radius: 6px; }
+    .relatorio-kpi-label { font-size: 0.65rem; color: #64748b; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; }
+    .relatorio-kpi-val { font-size: 1.1rem; font-weight: 800; color: #0f172a; }
+    .relatorio-section-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.82rem; }
+    .relatorio-tabela-planilha { width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 0.8rem; }
+    .relatorio-tabela-planilha th { background: #eff6ff; color: #1e40af; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; padding: 8px 6px; border-bottom: 2px solid #bfdbfe; }
+    .relatorio-tabela-planilha td { padding: 8px 6px; border-bottom: 1px solid #e2e8f0; color: #334155; }
 
     /* CORREÇÃO DE IMPRESSÃO */
     @media print {
@@ -169,6 +250,12 @@
     </div>
   </header>
 
+  <!-- ABAS FIXAS NO TOPO (FINANCEIRO & VENDAS vs CONTROLE TÉCNICO) -->
+  <nav class="top-nav-tabs no-print" id="top-nav-container" style="display:none;">
+    <button class="top-tab-btn active" id="tab-btn-financeiro" type="button" onclick="mudarAbaTopo('financeiro')">💰 FINANCEIRO & VENDAS</button>
+    <button class="top-tab-btn tech-tab" id="tab-btn-tecnico" type="button" onclick="mudarAbaTopo('tecnico')">📊 CONTROLE TÉCNICO</button>
+  </nav>
+
   <main class="no-print">
     <!-- TELA DE LOGIN -->
     <div id="view-login" class="login-card">
@@ -181,25 +268,25 @@
       </form>
     </div>
 
-    <!-- MENU PRINCIPAL (DASHBOARD) -->
-    <div id="view-dashboard" style="display:none;">
+    <!-- ABA 1: FINANCEIRO & VENDAS (DASHBOARD) -->
+    <div id="view-financeiro" class="view-content" style="display:none;">
       <div class="grid-menu">
-        <button class="grid-btn full-width" type="button" onclick="navTo('pedidos')">
+        <button class="grid-btn full-width" type="button" onclick="navToSub('pedidos')">
           <span class="icon">🛒</span><span class="label">NOVO PEDIDO / VENDAS</span>
         </button>
-        <button class="grid-btn" type="button" onclick="navTo('clientes')"><span class="icon">👥</span><span class="label">CLIENTES</span></button>
-        <button class="grid-btn" type="button" onclick="navTo('produtos')"><span class="icon">📦</span><span class="label">ESTOQUE</span></button>
-        <button class="grid-btn admin-only" type="button" onclick="navTo('usuarios')"><span class="icon">🔑</span><span class="label">USUÁRIOS</span></button>
-        <button class="grid-btn admin-only" type="button" onclick="navTo('empresa')"><span class="icon">⚙</span><span class="label">EMPRESA</span></button>
-        <button class="grid-btn full-width" type="button" style="background: linear-gradient(145deg, #0f172a, #1e293b);" onclick="abrirResumoVendasDia()">
-          <span class="icon">📊</span><span class="label">RESUMO DE VENDAS DO DIA</span>
+        <button class="grid-btn" type="button" onclick="navToSub('clientes')"><span class="icon">👥</span><span class="label">CLIENTES</span></button>
+        <button class="grid-btn" type="button" onclick="navToSub('produtos')"><span class="icon">📦</span><span class="label">ESTOQUE</span></button>
+        <button class="grid-btn admin-only" type="button" onclick="navToSub('usuarios')"><span class="icon">🔑</span><span class="label">USUÁRIOS</span></button>
+        <button class="grid-btn admin-only" type="button" onclick="navToSub('empresa')"><span class="icon">⚙</span><span class="label">EMPRESA</span></button>
+        <button class="grid-btn full-width" type="button" style="background: linear-gradient(145deg, #0f172a, #1e293b);" onclick="abrirResumoVendas()">
+          <span class="icon">📈</span><span class="label">RELATÓRIO DE VENDAS (DIAS / MÊS)</span>
         </button>
       </div>
 
       <div class="card" style="margin-top: 15px;">
         <div class="card-header">
           <div class="card-title">📋 Busca Rápida de Clientes</div>
-          <button class="btn btn-back" type="button" onclick="navTo('clientes')">➕ Cadastrar</button>
+          <button class="btn btn-back" type="button" onclick="navToSub('clientes')">➕ Cadastrar</button>
         </div>
         <div class="form-group" style="margin-bottom: 10px;">
           <input type="text" id="dash-busca-cliente" placeholder="🔎 Digite para buscar cliente..." oninput="filtrarClientesDashboard()">
@@ -211,12 +298,118 @@
       </div>
     </div>
 
+    <!-- ABA 2: CONTROLE TÉCNICO & ZOOTECNIA -->
+    <div id="view-tecnico" class="view-content" style="display:none;">
+      
+      <!-- MENU GRID DA ABA TÉCNICA -->
+      <div class="grid-menu" id="tec-menu-grid">
+        <button class="grid-btn full-width tech-btn" type="button" onclick="abrirSecaoTecnica('lotes')"><span class="icon">🐔</span><span class="label">CADASTRO / ALOJAMENTO DE LOTE</span></button>
+        <button class="grid-btn" type="button" onclick="abrirSecaoTecnica('postura')"><span class="icon">🥚</span><span class="label">REGISTRO DIÁRIO DE POSTURA</span></button>
+        <button class="grid-btn" type="button" onclick="abrirSecaoTecnica('mortalidade')"><span class="icon">⚰️</span><span class="label">REGISTRO DE MORTALIDADE</span></button>
+        <button class="grid-btn full-width" type="button" style="background: linear-gradient(145deg, #d97706, #b45309);" onclick="abrirSecaoTecnica('vacinacao')"><span class="icon">💉</span><span class="label">CONTROLE DE VACINAÇÃO</span></button>
+      </div>
+
+      <!-- BOTÃO DE VOLTAR AO MENU TÉCNICO -->
+      <div id="tec-btn-voltar-container" style="display:none; margin-bottom: 12px;">
+        <button class="btn btn-back" type="button" onclick="voltarMenuTecnico()">◀️ Voltar ao Menu Técnico</button>
+      </div>
+
+      <!-- 1. CADASTRO DE LOTES -->
+      <div class="card tec-secao-form" id="tec-form-lotes" style="display: none; border-left: 4px solid var(--tech);">
+        <div class="card-title" style="margin-bottom: 12px; color: var(--tech);">🐔 Cadastrar / Alojamento de Lote</div>
+        <form onsubmit="cadastrarLoteTecnico(event)">
+          <div class="form-group"><label>Nome / Identificação do Lote</label><input type="text" id="lote-nome" placeholder="Ex: Lote 01 - Galpão A" required></div>
+          <div class="form-group"><label>Data de Alojamento</label><input type="date" id="lote-data-alojamento" required></div>
+          <div class="form-group"><label>Linhagem / Raça</label><input type="text" id="lote-linhagem" placeholder="Ex: Hy-Line Brown" required></div>
+          <div class="form-group"><label>Quantidade Inicial de Aves</label><input type="number" id="lote-qtd-inicial" min="1" placeholder="Ex: 1000" required></div>
+          <div class="form-group"><label>Idade Inicial na Chegada (Semanas)</label><input type="number" id="lote-idade-inicial" min="0" placeholder="Ex: 16" required></div>
+          <button type="submit" class="btn btn-tech">➕ Salvar Lote Técnico</button>
+        </form>
+      </div>
+
+      <!-- 2. REGISTRO DIÁRIO DE POSTURA -->
+      <div class="card tec-secao-form" id="tec-form-postura" style="display: none; border-left: 4px solid var(--tech);">
+        <div class="card-title" style="margin-bottom: 12px; color: var(--tech);">🥚 Registo Diário de Postura</div>
+        <form onsubmit="registrarPosturaDiaria(event)">
+          <div class="form-group"><label>Selecione o Lote</label><select id="postura-lote-id" required></select></div>
+          <div class="form-group"><label>Data da Coleta</label><input type="date" id="postura-data" required></div>
+          <div class="form-group"><label>Ovos Colhidos no Dia (Unidades)</label><input type="number" id="postura-ovos-colhidos" min="0" placeholder="Ex: 750" required></div>
+          <div class="form-group"><label>Consumo de Ração no Dia (Kg - Opcional)</label><input type="number" step="0.1" id="postura-racao" placeholder="Ex: 110.5"></div>
+          <div class="form-group"><label>Temperatura Média / Obs Ambiência</label><input type="text" id="postura-obs" placeholder="Ex: Temp 24°C / Luz 16h"></div>
+          <button type="submit" class="btn btn-success">✅ Registar Produção & Calcular Taxa</button>
+        </form>
+      </div>
+
+      <!-- 3. REGISTRO DE MORTALIDADE -->
+      <div class="card tec-secao-form" id="tec-form-mortalidade" style="display: none; border-left: 4px solid var(--danger);">
+        <div class="card-title" style="margin-bottom: 12px; color: var(--danger);">⚰️ Registo de Mortalidade / Baixas</div>
+        <form onsubmit="registrarMortalidadeTecnica(event)">
+          <div class="form-group"><label>Selecione o Lote</label><select id="morte-lote-id" required></select></div>
+          <div class="form-group"><label>Data do Ocorrido</label><input type="date" id="morte-data" required></div>
+          <div class="form-group"><label>Quantidade de Aves Mortas</label><input type="number" id="morte-qtd" min="1" placeholder="Ex: 1" required></div>
+          <div class="form-group"><label>Motivo / Observação</label><input type="text" id="morte-obs" placeholder="Ex: Doença, calor, etc."></div>
+          <button type="submit" class="btn btn-danger">⚠️ Registar Mortalidade</button>
+        </form>
+      </div>
+
+      <!-- 4. CONTROLE DE VACINAÇÃO -->
+      <div class="card tec-secao-form" id="tec-form-vacinacao" style="display: none; border-left: 4px solid var(--warning);">
+        <div class="card-title" style="margin-bottom: 12px; color: var(--warning);">💉 Controle & Histórico de Vacinação</div>
+        <form onsubmit="registrarVacinacaoTecnica(event)">
+          <div class="form-group"><label>Selecione o Lote</label><select id="vacina-lote-id" required></select></div>
+          <div class="form-group"><label>Tipo / Nome da Vacina</label><input type="text" id="vacina-nome" placeholder="Ex: Newcastle / Gumboro" required></div>
+          <div class="form-group"><label>Quantidade de Aves Vacinadas</label><input type="number" id="vacina-qtd-aves" min="1" placeholder="Ex: 1000" required></div>
+          <div class="form-group"><label>Data da Aplicação</label><input type="date" id="vacina-data" required></div>
+          <button type="submit" class="btn btn-warning" style="color:#fff;">💉 Registar Vacinação</button>
+        </form>
+      </div>
+
+      <!-- HISTÓRICO E INDICADORES TÉCNICOS -->
+      <div class="card" id="tec-painel-historicos">
+        <div class="card-title">Indicadores Zootécnicos & Histórico Geral</div>
+        <div style="margin-top: 10px; font-size: 0.85rem; background: #f8fafc; padding: 10px; border-radius: 8px; border:1px solid #e2e8f0; margin-bottom: 10px;">
+          <div>📊 <strong>Média de Postura do Mês Atual:</strong> <span id="kpi-media-mensal" style="color:var(--tech); font-weight:bold;">0%</span></div>
+        </div>
+
+        <div style="font-size:0.75rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; margin-top:10px;">Lotes Alojados Atualmente</div>
+        <table>
+          <thead><tr><th>Lote / Linhagem</th><th>Aves Vivas</th><th>Idade Atual</th><th>Ação</th></tr></thead>
+          <tbody id="lista-lotes-tecnicos"></tbody>
+        </table>
+
+        <div style="font-size:0.75rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; margin-top:15px;">Histórico de Postura</div>
+        <table>
+          <thead><tr><th>Data</th><th>Lote</th><th>Ovos</th><th>Taxa Postura</th></tr></thead>
+          <tbody id="lista-historico-postura"></tbody>
+        </table>
+
+        <div style="font-size:0.75rem; font-weight:bold; color:var(--danger); text-transform:uppercase; margin-top:15px;">Histórico de Mortalidade</div>
+        <table>
+          <thead><tr><th>Data</th><th>Lote</th><th>Baixas</th><th>Motivo</th></tr></thead>
+          <tbody id="lista-historico-mortalidade"></tbody>
+        </table>
+
+        <div style="font-size:0.75rem; font-weight:bold; color:var(--warning); text-transform:uppercase; margin-top:15px;">Histórico de Vacinação</div>
+        <table>
+          <thead><tr><th>Data</th><th>Lote</th><th>Vacina</th><th>Aves Vacinadas</th></tr></thead>
+          <tbody id="lista-historico-vacinacao"></tbody>
+        </table>
+      </div>
+
+      <!-- BOTÕES DE RELATÓRIO GERAL E ZERAR DADOS -->
+      <div class="grid-menu" style="margin-top: 20px; margin-bottom: 20px;">
+        <button class="grid-btn full-width tech-action" type="button" onclick="abrirModalRelatorioTecnico()"><span class="icon">🖨️</span><span class="label">RELATÓRIO TÉCNICO GERAL (IMPRESSÃO)</span></button>
+        <button class="grid-btn full-width danger-action" type="button" onclick="abrirModalZerarDadosTecnicos()"><span class="icon">⚠️</span><span class="label">ZERAR DADOS DO CONTROLE TÉCNICO</span></button>
+      </div>
+
+    </div>
+
     <!-- TELA: CLIENTES -->
     <div id="view-clientes" class="view-content" style="display:none;">
       <div class="card">
         <div class="card-header">
           <div class="card-title">Cadastrar Cliente</div>
-          <button class="btn btn-back" type="button" onclick="navTo('dashboard')">🏠 Início</button>
+          <button class="btn btn-back" type="button" onclick="mudarAbaTopo('financeiro')">🏠 Voltar</button>
         </div>
         <form onsubmit="cadastrarCliente(event)">
           <div class="form-group"><label>Nome / Razão Social</label><input type="text" id="cli-nome" required></div>
@@ -240,7 +433,7 @@
       <div class="card">
         <div class="card-header">
           <div class="card-title">Novo Pedido</div>
-          <button class="btn btn-back" type="button" onclick="navTo('dashboard')">🏠 Início</button>
+          <button class="btn btn-back" type="button" onclick="mudarAbaTopo('financeiro')">🏠 Voltar</button>
         </div>
         
         <form onsubmit="finalizarPedido(event)">
@@ -308,9 +501,17 @@
       </div>
 
       <div class="card">
-        <div class="card-title">Histórico de Pedidos Sequencial</div>
+        <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+          <div class="card-title">Histórico de Pedidos Sequencial</div>
+          <button class="btn" type="button" style="width:auto; background:#2563eb; padding:6px 12px; font-size:0.8rem;" onclick="preVisualizarRecibosSelecionados()">🖨️ Imprimir Recibos</button>
+        </div>
         <table>
-          <thead><tr><th># Pedido</th><th>Cliente</th><th>Total</th><th>Status</th><th>Ações</th></tr></thead>
+          <thead>
+            <tr>
+              <th style="width: 30px;"><input type="checkbox" id="check-todos-pedidos" onclick="alternarTodosPedidos(this)"></th>
+              <th># Pedido</th><th>Cliente</th><th>Total</th><th>Status</th><th>Ações</th>
+            </tr>
+          </thead>
           <tbody id="lista-pedidos"></tbody>
         </table>
       </div>
@@ -322,12 +523,15 @@
       <div class="card" style="border-left: 4px solid var(--accent);">
         <div class="card-header">
           <div class="card-title">🥚 Registrar Entrada de Produção (Diário)</div>
-          <button class="btn btn-back" type="button" onclick="navTo('dashboard')">🏠 Início</button>
+          <button class="btn btn-back" type="button" onclick="mudarAbaTopo('financeiro')">🏠 Voltar</button>
         </div>
 
-        <div class="stat-card" style="background: #eff6ff; border-color: #bfdbfe;">
-          <div class="stat-title">Saldo Geral de Ovos em Estoque</div>
-          <div class="stat-value" id="estoque-geral-ovos" style="font-size: 1.8rem;">0 Ovos</div>
+        <div class="stat-card" style="background: #eff6ff; border-color: #bfdbfe; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div class="stat-title">Saldo Geral de Ovos em Estoque</div>
+            <div class="stat-value" id="estoque-geral-ovos" style="font-size: 1.8rem;">0 Ovos</div>
+          </div>
+          <button class="btn admin-only" type="button" style="width: auto; background: var(--warning); padding: 8px 12px; font-size: 0.8rem;" onclick="abrirModalBalanco()">⚖️ Atualizar Estoque</button>
         </div>
 
         <form onsubmit="registrarEntradaProducao(event)">
@@ -386,7 +590,7 @@
       <div class="card">
         <div class="card-header">
           <div class="card-title">Adicionar Usuário</div>
-          <button class="btn btn-back" type="button" onclick="navTo('dashboard')">🏠 Início</button>
+          <button class="btn btn-back" type="button" onclick="mudarAbaTopo('financeiro')">🏠 Voltar</button>
         </div>
         <form onsubmit="cadastrarUsuario(event)">
           <div class="form-group"><label>Login / Nome</label><input type="text" id="usr-login" required autocomplete="username"></div>
@@ -415,7 +619,7 @@
       <div class="card">
         <div class="card-header">
           <div class="card-title">🔒 Alterar Minha Senha</div>
-          <button class="btn btn-back" type="button" onclick="navTo('dashboard')">🏠 Início</button>
+          <button class="btn btn-back" type="button" onclick="mudarAbaTopo('financeiro')">🏠 Voltar</button>
         </div>
         <form onsubmit="alterarMinhaSenha(event)">
           <div class="form-group"><label>Nova Senha</label><input type="password" id="minha-nova-senha" placeholder="Digite a nova senha" required autocomplete="new-password"></div>
@@ -441,6 +645,83 @@
       </div>
     </div>
   </main>
+
+  <!-- MODAL: FILTRO DO RELATÓRIO TÉCNICO -->
+  <div class="modal" id="modal-relatorio-tecnico">
+    <div class="modal-content" style="max-width: 520px;">
+      <div class="card-title" style="margin-bottom:12px;">📊 Relatório Geral Técnico (Zootecnia)</div>
+      <div class="form-group">
+        <label>Período do Relatório</label>
+        <select id="tec-filtro-periodo" onchange="atualizarFiltroRelatorioTecnico()">
+          <option value="mes">Este Mês Atual</option>
+          <option value="ano">Este Ano Atual</option>
+          <option value="tudo">Desde o Início (Todos os Registos)</option>
+          <option value="personalizado">Personalizado (Intervalo de Datas)</option>
+        </select>
+      </div>
+      <div id="tec-container-datas" style="display:none; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+        <div class="form-group" style="margin-bottom:0;"><label>Data Inicial</label><input type="date" id="tec-data-inicio"></div>
+        <div class="form-group" style="margin-bottom:0;"><label>Data Final</label><input type="date" id="tec-data-fim"></div>
+      </div>
+      <div id="tec-resumo-periodo-texto" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px; font-weight:bold;"></div>
+
+      <div id="area-relatorio-tec-impressao" class="relatorio-sheet-box">
+        <div class="relatorio-sheet-header">
+          <h3>Relatório Técnico da Granja</h3>
+          <span style="font-size: 0.75rem; font-weight: 600; opacity: 0.9;" id="tec-relatorio-emissao"></span>
+        </div>
+        <div class="relatorio-kpi-grid">
+          <div class="relatorio-kpi-item"><div class="relatorio-kpi-label">Média Taxa Postura</div><div class="relatorio-kpi-val" id="tec-kpi-taxa" style="color: #0d9488;">0%</div></div>
+          <div class="relatorio-kpi-item"><div class="relatorio-kpi-label">Total Ovos Coletados</div><div class="relatorio-kpi-val" id="tec-kpi-ovos">0</div></div>
+        </div>
+        <div class="relatorio-section-box">
+          <div style="font-size: 0.7rem; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 4px;">Mortalidade e Vacinas no Período</div>
+          <div id="tec-resumo-baixas-vacinas" style="line-height: 1.4; color: #1e293b;"></div>
+        </div>
+        <div>
+          <div style="font-size: 0.7rem; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 4px;">Lotes Alojados</div>
+          <table class="relatorio-tabela-planilha">
+            <thead><tr><th>Lote / Linhagem</th><th>Aves Vivas</th><th>Alojamento</th></tr></thead>
+            <tbody id="tec-resumo-tabela-lotes"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr; gap:8px; margin-top:15px;">
+        <button class="btn" type="button" style="background:var(--tech);" onclick="imprimirRelatorioTecnicoDireto()">🖨️ Imprimir / Salvar Relatório</button>
+        <button class="btn" type="button" onclick="document.getElementById('modal-relatorio-tecnico').style.display='none'" style="background:#64748b;">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ZERAR DADOS TÉCNICOS -->
+  <div class="modal" id="modal-zerar-tecnico">
+    <div class="modal-content" style="max-width: 380px;">
+      <div class="card-title" style="margin-bottom: 12px; color: var(--danger);">⚠️ Zerar Dados Técnicos</div>
+      <p style="font-size:0.85rem; color:#475569; margin-bottom: 15px;">
+        Esta ação apagará <strong>todos</strong> os lotes, registos de postura, mortalidade e vacinação cadastrados no controle técnico. Deseja continuar?
+      </p>
+      <div style="display: flex; gap: 10px;">
+        <button type="button" class="btn btn-danger" onclick="executarZerarDadosTecnicos()">Sim, Zerar Tudo</button>
+        <button type="button" class="btn" style="background: #64748b;" onclick="document.getElementById('modal-zerar-tecnico').style.display='none'">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: BALANÇO DE ESTOQUE -->
+  <div class="modal" id="modal-balanco">
+    <div class="modal-content" style="max-width: 380px;">
+      <div class="card-title" style="margin-bottom: 12px;">⚖️ Balanço Manual de Estoque</div>
+      <form onsubmit="salvarBalancoEstoque(event)">
+        <div class="form-group"><label>Novo Saldo Real de Ovos</label><input type="number" id="balanco-nova-qtd" min="0" placeholder="Ex: 12500" required></div>
+        <div class="form-group"><label>Motivo / Observação do Ajuste</label><input type="text" id="balanco-motivo" placeholder="Ex: Contagem física" required></div>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+          <button type="submit" class="btn" style="background: var(--warning);">Salvar Balanço</button>
+          <button type="button" class="btn" style="background: #64748b;" onclick="fecharModalBalanco()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- MODAL DE COMPROVANTE / NOTA FISCAL -->
   <div class="modal" id="modal-nota">
@@ -472,42 +753,52 @@
     </div>
   </div>
 
-  <!-- MODAL: RESUMO DE VENDAS DO DIA -->
+  <!-- MODAL: RELATÓRIO DE VENDAS -->
   <div class="modal" id="modal-resumo">
-    <div class="modal-content">
-      <div class="card-title" style="margin-bottom:12px;">📊 Resumo de Vendas Hoje</div>
-      <div id="resumo-data-hoje" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:15px; font-weight:bold;"></div>
-
-      <div class="stat-card">
-        <div class="stat-title">Total Vendido Hoje</div>
-        <div class="stat-value" id="resumo-total-hoje">R$ 0,00</div>
+    <div class="modal-content" style="max-width: 520px;">
+      <div class="card-title" style="margin-bottom:12px;">📊 Relatório de Vendas e Faturamento</div>
+      <div class="form-group">
+        <label>Filtrar Período</label>
+        <select id="filtro-periodo" onchange="atualizarFiltroRelatorio()">
+          <option value="hoje">Hoje</option>
+          <option value="semana">Últimos 7 Dias (Semana)</option>
+          <option value="mes">Este Mês Atual</option>
+          <option value="personalizado">Personalizado (Intervalo de Datas)</option>
+        </select>
       </div>
+      <div id="container-datas-personalizadas" style="display:none; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+        <div class="form-group" style="margin-bottom:0;"><label>Data Inicial</label><input type="date" id="data-inicio" onchange="renderizarDadosRelatorio()"></div>
+        <div class="form-group" style="margin-bottom:0;"><label>Data Final</label><input type="date" id="data-fim" onchange="renderizarDadosRelatorio()"></div>
+      </div>
+      <div id="resumo-periodo-texto" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px; font-weight:bold;"></div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
-        <div class="stat-card" style="margin:0;">
-          <div class="stat-title">Nº de Pedidos</div>
-          <div class="stat-value" id="resumo-qtd-pedidos">0</div>
+      <div id="area-relatorio-impressao" class="relatorio-sheet-box">
+        <div class="relatorio-sheet-header">
+          <h3>Relatório de Vendas</h3>
+          <span style="font-size: 0.75rem; font-weight: 600; opacity: 0.9;" id="relatorio-data-emissao"></span>
         </div>
-        <div class="stat-card" style="margin:0;">
-          <div class="stat-title">Ticket Médio</div>
-          <div class="stat-value" id="resumo-ticket-medio">R$ 0,00</div>
+        <div class="relatorio-kpi-grid">
+          <div class="relatorio-kpi-item"><div class="relatorio-kpi-label">Total Faturado</div><div class="relatorio-kpi-val" id="resumo-total-periodo" style="color: #2563eb;">R$ 0,00</div></div>
+          <div class="relatorio-kpi-item"><div class="relatorio-kpi-label">Nº de Pedidos</div><div class="relatorio-kpi-val" id="resumo-qtd-pedidos">0</div></div>
+        </div>
+        <div class="relatorio-section-box">
+          <div style="font-size: 0.7rem; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 4px;">Recebimento por Forma de Pagamento</div>
+          <div id="resumo-detalhe-formas" style="line-height: 1.4; color: #1e293b;"></div>
+        </div>
+        <div>
+          <div style="font-size: 0.7rem; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 4px;">Vendas Listadas no Período</div>
+          <table class="relatorio-tabela-planilha">
+            <thead><tr><th># Pedido</th><th>Data</th><th>Cliente</th><th>Total</th><th>Status</th></tr></thead>
+            <tbody id="resumo-tabela-periodo"></tbody>
+          </table>
         </div>
       </div>
 
-      <div class="stat-card">
-        <div class="stat-title" style="margin-bottom:6px;">Recebimento por Forma de Pagamento</div>
-        <div id="resumo-detalhe-formas" style="font-size:0.85rem; line-height:1.4;"></div>
+      <div style="display:grid; grid-template-columns: 1fr; gap:8px; margin-top:15px;">
+        <button class="btn" type="button" style="background:#2563eb;" onclick="imprimirRelatorioDireto()">🖨️ Imprimir / Salvar Relatório</button>
+        <button class="btn" type="button" style="background:#475569;" onclick="exportarRelatorioExcel()">📊 Exportar Excel</button>
+        <button class="btn" type="button" onclick="document.getElementById('modal-resumo').style.display='none'" style="background:#64748b;">Fechar</button>
       </div>
-
-      <div style="margin-top:15px;">
-        <div class="stat-title" style="margin-bottom:6px;">Vendas Realizadas Hoje</div>
-        <table>
-          <thead><tr><th>#</th><th>Cliente</th><th>Total</th><th>Status</th></tr></thead>
-          <tbody id="resumo-tabela-hoje"></tbody>
-        </table>
-      </div>
-
-      <button class="btn" type="button" onclick="document.getElementById('modal-resumo').style.display='none'" style="background:#64748b; margin-top:15px;">Fechar Resumo</button>
     </div>
   </div>
 
@@ -534,6 +825,10 @@
       pedidos: [],
       producao: [],
       estoqueGeralOvos: 0,
+      lotesTecnicos: [],
+      historicoPosturaTecnica: [],
+      historicoMortalidade: [],
+      historicoVacinacao: [],
       currentUser: null,
       pedidoAtual: null
     };
@@ -589,6 +884,24 @@
         renderProducaoHoje();
       }, err => console.error("Erro producao:", err));
 
+      // LISTENERS DO CONTROLE TÉCNICO (ZOOTECNIA)
+      db.collection("lotes_tecnicos").onSnapshot(snapshot => {
+        state.lotesTecnicos = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        renderControleTecnico();
+      });
+      db.collection("producao_zootecnica").onSnapshot(snapshot => {
+        state.historicoPosturaTecnica = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        renderControleTecnico();
+      });
+      db.collection("mortalidade_tecnica").onSnapshot(snapshot => {
+        state.historicoMortalidade = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        renderControleTecnico();
+      });
+      db.collection("vacinacao_tecnica").onSnapshot(snapshot => {
+        state.historicoVacinacao = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        renderControleTecnico();
+      });
+
       db.collection("config").doc("empresa").onSnapshot(doc => {
         if (doc.exists) {
           state.empresa = doc.data();
@@ -620,9 +933,10 @@
         state.currentUser = found;
         document.getElementById('view-login').style.display = 'none';
         document.getElementById('app-header').style.display = 'flex';
+        document.getElementById('top-nav-container').style.display = 'flex';
         document.getElementById('user-display').innerText = `👤 ${found.login.toUpperCase()}`;
         document.querySelectorAll('.admin-only').forEach(el => el.style.display = found.role === 'admin' ? 'flex' : 'none');
-        navTo('dashboard');
+        mudarAbaTopo('financeiro');
       } else {
         alert('Usuário ou senha incorretos! Verifique os seus dados de acesso.');
       }
@@ -631,21 +945,51 @@
     function logout() {
       state.currentUser = null;
       document.getElementById('app-header').style.display = 'none';
+      document.getElementById('top-nav-container').style.display = 'none';
       document.querySelectorAll('.view-content').forEach(v => v.style.display = 'none');
-      document.getElementById('view-dashboard').style.display = 'none';
       document.getElementById('view-login').style.display = 'block';
       document.getElementById('login-pass').value = '';
     }
 
-    function navTo(screen) {
-      document.getElementById('view-dashboard').style.display = 'none';
+    function mudarAbaTopo(aba) {
+      document.querySelectorAll('.top-tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.view-content').forEach(v => v.style.display = 'none');
-      if (screen === 'dashboard') {
-        document.getElementById('view-dashboard').style.display = 'block';
+
+      if (aba === 'financeiro') {
+        document.getElementById('tab-btn-financeiro').classList.add('active');
+        document.getElementById('view-financeiro').style.display = 'block';
         filtrarClientesDashboard();
-      } else {
-        document.getElementById(`view-${screen}`).style.display = 'block';
+      } else if (aba === 'tecnico') {
+        document.getElementById('tab-btn-tecnico').classList.add('active');
+        document.getElementById('view-tecnico').style.display = 'block';
+        voltarMenuTecnico();
+        renderControleTecnico();
       }
+      render();
+    }
+
+    function abrirSecaoTecnica(secao) {
+      document.getElementById('tec-menu-grid').style.display = 'none';
+      document.getElementById('tec-painel-historicos').style.display = 'none';
+      document.getElementById('tec-btn-voltar-container').style.display = 'block';
+
+      document.querySelectorAll('.tec-secao-form').forEach(el => el.style.display = 'none');
+      const alvo = document.getElementById('tec-form-' + secao);
+      if (alvo) alvo.style.display = 'block';
+    }
+
+    function voltarMenuTecnico() {
+      document.getElementById('tec-menu-grid').style.display = 'grid';
+      document.getElementById('tec-painel-historicos').style.display = 'block';
+      document.getElementById('tec-btn-voltar-container').style.display = 'none';
+      document.querySelectorAll('.tec-secao-form').forEach(el => el.style.display = 'none');
+      renderControleTecnico();
+    }
+
+    function navToSub(screen) {
+      document.querySelectorAll('.view-content').forEach(v => v.style.display = 'none');
+      const el = document.getElementById(`view-${screen}`);
+      if (el) el.style.display = 'block';
       render();
     }
 
@@ -655,6 +999,7 @@
       renderPedidos();
       renderUsuarios();
       renderDropdowns();
+      renderControleTecnico();
     }
 
     function renderEstoqueGeral() {
@@ -678,17 +1023,298 @@
       }
     }
 
-    function alterarSenhaUsuario(docId, login) {
-      const novaSenha = prompt(`Digite a nova senha para o usuário ${login.toUpperCase()}:`);
-      if (novaSenha && novaSenha.trim() !== '') {
-        db.collection("usuarios").doc(docId).update({ pass: novaSenha.trim() })
-          .then(() => {
-            alert(`Senha do usuário ${login} alterada com sucesso!`);
-            if (state.currentUser && (state.currentUser.id === docId || state.currentUser.login === login)) {
-              state.currentUser.pass = novaSenha.trim();
-            }
-          })
-          .catch(err => alert('Erro ao alterar senha: ' + err.message));
+    // --- CONTROLE TÉCNICO (ZOOTECNIA) ---
+    async function cadastrarLoteTecnico(e) {
+      e.preventDefault();
+      const nome = document.getElementById('lote-nome').value.trim();
+      const dataAlojamento = document.getElementById('lote-data-alojamento').value;
+      const linhagem = document.getElementById('lote-linhagem').value.trim();
+      const qtdInicial = parseInt(document.getElementById('lote-qtd-inicial').value || 0);
+      const idadeInicialSemanas = parseInt(document.getElementById('lote-idade-inicial').value || 0);
+
+      try {
+        await db.collection("lotes_tecnicos").add({
+          nome, dataAlojamento, linhagem, qtdInicial, qtdAtual: qtdInicial, idadeInicialSemanas, criadoEm: new Date()
+        });
+        e.target.reset();
+        alert('Lote técnico cadastrado com sucesso!');
+        voltarMenuTecnico();
+      } catch (err) { alert('Erro: ' + err.message); }
+    }
+
+    async function excluirLoteTecnico(id) {
+      if (confirm("Tem certeza que deseja excluir este lote técnico?")) {
+        try {
+          await db.collection("lotes_tecnicos").doc(id).delete();
+          alert('Lote excluído!');
+        } catch (err) { alert('Erro: ' + err.message); }
+      }
+    }
+
+    async function registrarPosturaDiaria(e) {
+      e.preventDefault();
+      const loteId = document.getElementById('postura-lote-id').value;
+      const data = document.getElementById('postura-data').value;
+      const ovosColhidos = parseInt(document.getElementById('postura-ovos-colhidos').value || 0);
+      const racaoKg = parseFloat(document.getElementById('postura-racao').value || 0);
+      const obs = document.getElementById('postura-obs').value.trim();
+
+      const lote = state.lotesTecnicos.find(l => l.id === loteId);
+      if (!lote) return alert('Selecione um lote válido.');
+
+      const avesAtivas = lote.qtdAtual || lote.qtdInicial;
+      const taxaPostura = avesAtivas > 0 ? ((ovosColhidos / avesAtivas) * 100).toFixed(1) : 0;
+
+      try {
+        await db.collection("producao_zootecnica").add({
+          loteId, loteNome: lote.nome, data, ovosColhidos, racaoKg, obs, taxaPostura: parseFloat(taxaPostura), criadoEm: new Date()
+        });
+        e.target.reset();
+        alert(`Registo efetuado com sucesso! Taxa de Postura do dia: ${taxaPostura}%`);
+        voltarMenuTecnico();
+      } catch (err) { alert('Erro: ' + err.message); }
+    }
+
+    async function registrarMortalidadeTecnica(e) {
+      e.preventDefault();
+      const loteId = document.getElementById('morte-lote-id').value;
+      const data = document.getElementById('morte-data').value;
+      const qtdMortas = parseInt(document.getElementById('morte-qtd').value || 0);
+      const motivo = document.getElementById('morte-obs').value.trim();
+
+      const lote = state.lotesTecnicos.find(l => l.id === loteId);
+      if (!lote) return alert('Selecione um lote válido.');
+
+      const novaQtdAtual = Math.max(0, (lote.qtdAtual || lote.qtdInicial) - qtdMortas);
+
+      try {
+        await db.collection("mortalidade_tecnica").add({
+          loteId, loteNome: lote.nome, data, qtdMortas, motivo, criadoEm: new Date()
+        });
+        await db.collection("lotes_tecnicos").doc(loteId).update({ qtdAtual: novaQtdAtual });
+        e.target.reset();
+        alert('Mortalidade registada com sucesso e abatida do lote!');
+        voltarMenuTecnico();
+      } catch (err) { alert('Erro: ' + err.message); }
+    }
+
+    async function registrarVacinacaoTecnica(e) {
+      e.preventDefault();
+      const loteId = document.getElementById('vacina-lote-id').value;
+      const vacinaNome = document.getElementById('vacina-nome').value.trim();
+      const qtdAves = parseInt(document.getElementById('vacina-qtd-aves').value || 0);
+      const data = document.getElementById('vacina-data').value;
+
+      const lote = state.lotesTecnicos.find(l => l.id === loteId);
+      if (!lote) return alert('Selecione um lote válido.');
+
+      try {
+        await db.collection("vacinacao_tecnica").add({
+          loteId, loteNome: lote.nome, vacinaNome, qtdAves, data, criadoEm: new Date()
+        });
+        e.target.reset();
+        alert('Vacinação registada com sucesso no histórico sanitário!');
+        voltarMenuTecnico();
+      } catch (err) { alert('Erro: ' + err.message); }
+    }
+
+    function abrirModalZerarDadosTecnicos() {
+      document.getElementById('modal-zerar-tecnico').style.display = 'flex';
+    }
+
+    async function executarZerarDadosTecnicos() {
+      try {
+        const batchP = db.batch();
+        const lotesSnap = await db.collection("lotes_tecnicos").get();
+        lotesSnap.docs.forEach(doc => batchP.delete(doc.ref));
+
+        const postSnap = await db.collection("producao_zootecnica").get();
+        postSnap.docs.forEach(doc => batchP.delete(doc.ref));
+
+        const mortSnap = await db.collection("mortalidade_tecnica").get();
+        mortSnap.docs.forEach(doc => batchP.delete(doc.ref));
+
+        const vacSnap = await db.collection("vacinacao_tecnica").get();
+        vacSnap.docs.forEach(doc => batchP.delete(doc.ref));
+
+        await batchP.commit();
+        document.getElementById('modal-zerar-tecnico').style.display = 'none';
+        alert('Todos os dados do controle técnico foram zerados com sucesso!');
+      } catch (err) { alert('Erro ao zerar dados: ' + err.message); }
+    }
+
+    function abrirModalRelatorioTecnico() {
+      document.getElementById('tec-filtro-periodo').value = 'mes';
+      atualizarFiltroRelatorioTecnico();
+      document.getElementById('modal-relatorio-tecnico').style.display = 'flex';
+    }
+
+    function atualizarFiltroRelatorioTecnico() {
+      const tipo = document.getElementById('tec-filtro-periodo').value;
+      document.getElementById('tec-container-datas').style.display = (tipo === 'personalizado') ? 'grid' : 'none';
+      renderizarDadosRelatorioTecnico();
+    }
+
+    function renderizarDadosRelatorioTecnico() {
+      const tipo = document.getElementById('tec-filtro-periodo').value;
+      const agora = new Date();
+      document.getElementById('tec-relatorio-emissao').innerText = "Emitido em: " + agora.toLocaleDateString('pt-BR') + " " + agora.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+      let posturaFiltrada = state.historicoPosturaTecnica;
+      let mortalidadeFiltrada = state.historicoMortalidade;
+      let vacinasFiltradas = state.historicoVacinacao;
+
+      if (tipo === 'mes') {
+        posturaFiltrada = state.historicoPosturaTecnica.filter(h => {
+          if (!h.data) return false;
+          const d = new Date(h.data + 'T00:00:00');
+          return d.getMonth() === agora.getMonth() && d.getFullYear() === agora.getFullYear();
+        });
+        mortalidadeFiltrada = state.historicoMortalidade.filter(m => {
+          if (!m.data) return false;
+          const d = new Date(m.data + 'T00:00:00');
+          return d.getMonth() === agora.getMonth() && d.getFullYear() === agora.getFullYear();
+        });
+        vacinasFiltradas = state.historicoVacinacao.filter(v => {
+          if (!v.data) return false;
+          const d = new Date(v.data + 'T00:00:00');
+          return d.getMonth() === agora.getMonth() && d.getFullYear() === agora.getFullYear();
+        });
+      } else if (tipo === 'ano') {
+        posturaFiltrada = state.historicoPosturaTecnica.filter(h => {
+          if (!h.data) return false;
+          const d = new Date(h.data + 'T00:00:00');
+          return d.getFullYear() === agora.getFullYear();
+        });
+        mortalidadeFiltrada = state.historicoMortalidade.filter(m => {
+          if (!m.data) return false;
+          const d = new Date(m.data + 'T00:00:00');
+          return d.getFullYear() === agora.getFullYear();
+        });
+        vacinasFiltradas = state.historicoVacinacao.filter(v => {
+          if (!v.data) return false;
+          const d = new Date(v.data + 'T00:00:00');
+          return d.getFullYear() === agora.getFullYear();
+        });
+      } else if (tipo === 'personalizado') {
+        const dataInicio = document.getElementById('tec-data-inicio').value;
+        const dataFim = document.getElementById('tec-data-fim').value;
+        if (dataInicio && dataFim) {
+          const ini = new Date(dataInicio + 'T00:00:00');
+          const fim = new Date(dataFim + 'T23:59:59');
+          posturaFiltrada = state.historicoPosturaTecnica.filter(h => { const d = new Date(h.data + 'T00:00:00'); return d >= ini && d <= fim; });
+          mortalidadeFiltrada = state.historicoMortalidade.filter(m => { const d = new Date(m.data + 'T00:00:00'); return d >= ini && d <= fim; });
+          vacinasFiltradas = state.historicoVacinacao.filter(v => { const d = new Date(v.data + 'T00:00:00'); return d >= ini && d <= fim; });
+        } else {
+          posturaFiltrada = []; mortalidadeFiltrada = []; vacinasFiltradas = [];
+        }
+      }
+
+      let somaTaxas = 0; let totalOvosPeriodo = 0;
+      posturaFiltrada.forEach(p => { somaTaxas += (p.taxaPostura || 0); totalOvosPeriodo += (p.ovosColhidos || 0); });
+      const mediaTaxa = posturaFiltrada.length > 0 ? (somaTaxas / posturaFiltrada.length).toFixed(1) : 0;
+
+      document.getElementById('tec-kpi-taxa').innerText = mediaTaxa + '%';
+      document.getElementById('tec-kpi-ovos').innerText = totalOvosPeriodo.toLocaleString('pt-BR') + ' ovos';
+
+      const totalMortes = mortalidadeFiltrada.reduce((acc, m) => acc + (m.qtdMortas || 0), 0);
+      const totalVacinasAplicadas = vacinasFiltradas.reduce((acc, v) => acc + (v.qtdAves || 0), 0);
+
+      document.getElementById('tec-resumo-baixas-vacinas').innerHTML = `
+        • Total de Baixas / Mortalidade: <strong>${totalMortes} aves</strong><br>
+        • Total de Aplicações de Vacinas: <strong>${totalVacinasAplicadas} doses</strong> (${vacinasFiltradas.length} campanhas)
+      `;
+
+      document.getElementById('tec-resumo-tabela-lotes').innerHTML = state.lotesTecnicos.map(l => `
+        <tr><td><strong>${l.nome}</strong><br><small>${l.linhagem}</small></td><td>${l.qtdAtual || l.qtdInicial} aves</td><td>${l.dataAlojamento || '---'}</td></tr>
+      `).join('') || '<tr><td colspan="3" style="text-align:center;">Nenhum lote.</td></tr>';
+    }
+
+    function imprimirRelatorioTecnicoDireto() {
+      const conteudoHtml = document.getElementById('area-relatorio-tec-impressao').outerHTML;
+      document.getElementById('modal-relatorio-tecnico').style.display = 'none';
+      abrirJanelaImpressaoOtimizada(conteudoHtml);
+    }
+
+    function renderControleTecnico() {
+      const selectLotePostura = document.getElementById('postura-lote-id');
+      const selectLoteMorte = document.getElementById('morte-lote-id');
+      const selectLoteVacina = document.getElementById('vacina-lote-id');
+      const tabelaLotes = document.getElementById('lista-lotes-tecnicos');
+      const tabelaHistorico = document.getElementById('lista-historico-postura');
+      const tabelaMortalidade = document.getElementById('lista-historico-mortalidade');
+      const tabelaVacinacao = document.getElementById('lista-historico-vacinacao');
+      const kpiMediaMensal = document.getElementById('kpi-media-mensal');
+
+      if (!tabelaLotes) return;
+
+      const optionsLotes = state.lotesTecnicos.map(l => `<option value="${l.id}">${l.nome} (${l.linhagem} - ${l.qtdAtual || l.qtdInicial} aves)</option>`).join('') || '<option value="">Cadastre um lote primeiro</option>';
+      if (selectLotePostura) selectLotePostura.innerHTML = optionsLotes;
+      if (selectLoteMorte) selectLoteMorte.innerHTML = optionsLotes;
+      if (selectLoteVacina) selectLoteVacina.innerHTML = optionsLotes;
+
+      tabelaLotes.innerHTML = state.lotesTecnicos.map(l => {
+        let semanasAtuais = l.idadeInicialSemanas || 0;
+        if (l.dataAlojamento) {
+          const diffDias = Math.floor((new Date() - new Date(l.dataAlojamento)) / (1000 * 60 * 60 * 24));
+          semanasAtuais += Math.floor(diffDias / 7);
+        }
+        return `
+          <tr>
+            <td><strong>${l.nome}</strong><br><small style="color:#64748b;">${l.linhagem}</small></td>
+            <td>${l.qtdAtual || l.qtdInicial} aves</td>
+            <td>${semanasAtuais} semanas</td>
+            <td><button class="btn-danger" type="button" onclick="excluirLoteTecnico('${l.id}')">🗑️</button></td>
+          </tr>
+        `;
+      }).join('') || '<tr><td colspan="4" style="text-align:center; color:#64748b;">Nenhum lote alojado.</td></tr>';
+
+      const agora = new Date();
+      const mesAtual = agora.getMonth();
+      const anoAtual = agora.getFullYear();
+
+      const registrosMes = state.historicoPosturaTecnica.filter(h => {
+        if (!h.data) return false;
+        const d = new Date(h.data + 'T00:00:00');
+        return d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
+      });
+
+      let somaTaxas = 0;
+      registrosMes.forEach(r => somaTaxas += (r.taxaPostura || 0));
+      const mediaMes = registrosMes.length > 0 ? (somaTaxas / registrosMes.length).toFixed(1) : 0;
+      if (kpiMediaMensal) kpiMediaMensal.innerText = mediaMes + '%';
+
+      if (tabelaHistorico) {
+        tabelaHistorico.innerHTML = state.historicoPosturaTecnica.slice(0, 15).map(h => `
+          <tr>
+            <td>${h.data ? new Date(h.data + 'T00:00:00').toLocaleDateString('pt-BR') : '---'}</td>
+            <td>${h.loteNome || 'Lote'}</td>
+            <td>${h.ovosColhidos} ovos</td>
+            <td><span class="badge badge-ativo">${h.taxaPostura || 0}%</span></td>
+          </tr>
+        `).join('') || '<tr><td colspan="4" style="text-align:center; color:#64748b;">Nenhum registo.</td></tr>';
+      }
+
+      if (tabelaMortalidade) {
+        tabelaMortalidade.innerHTML = state.historicoMortalidade.slice(0, 15).map(m => `
+          <tr>
+            <td>${m.data ? new Date(m.data + 'T00:00:00').toLocaleDateString('pt-BR') : '---'}</td>
+            <td>${m.loteNome || 'Lote'}</td>
+            <td><span class="badge badge-pendente">-${m.qtdMortas} aves</span></td>
+            <td>${m.motivo || 'Sem obs'}</td>
+          </tr>
+        `).join('') || '<tr><td colspan="4" style="text-align:center; color:#64748b;">Nenhum registo de mortalidade.</td></tr>';
+      }
+
+      if (tabelaVacinacao) {
+        tabelaVacinacao.innerHTML = state.historicoVacinacao.slice(0, 15).map(v => `
+          <tr>
+            <td>${v.data ? new Date(v.data + 'T00:00:00').toLocaleDateString('pt-BR') : '---'}</td>
+            <td>${v.loteNome || 'Lote'}</td>
+            <td><strong>${v.vacinaNome}</strong></td>
+            <td>${v.qtdAves} aves</td>
+          </tr>
+        `).join('') || '<tr><td colspan="4" style="text-align:center; color:#64748b;">Nenhum registo de vacinação.</td></tr>';
       }
     }
 
@@ -866,6 +1492,31 @@
       }).join('');
     }
 
+    function abrirModalBalanco() {
+      if (!state.currentUser || state.currentUser.role !== 'admin') { alert('Acesso restrito.'); return; }
+      document.getElementById('balanco-nova-qtd').value = state.estoqueGeralOvos || 0;
+      document.getElementById('balanco-motivo').value = '';
+      document.getElementById('modal-balanco').style.display = 'flex';
+    }
+
+    function fecharModalBalanco() {
+      document.getElementById('modal-balanco').style.display = 'none';
+    }
+
+    async function salvarBalancoEstoque(e) {
+      e.preventDefault();
+      const novaQtd = parseInt(document.getElementById('balanco-nova-qtd').value);
+      const motivo = document.getElementById('balanco-motivo').value.trim();
+      if (isNaN(novaQtd) || novaQtd < 0) return alert('Quantidade inválida.');
+
+      try {
+        const refEstoque = db.collection("estoque_geral").doc("saldo");
+        await refEstoque.set({ qtdOvos: novaQtd, ultimoAjusteEm: new Date(), ajustadoPor: state.currentUser.login, motivoAjuste: motivo }, { merge: true });
+        alert('Estoque atualizado com sucesso!');
+        fecharModalBalanco();
+      } catch (err) { alert('Erro ao salvar.'); }
+    }
+
     // --- PEDIDOS / CARRINHO ---
     function renderDropdowns() {
       filtrarClientesDropdown();
@@ -1012,6 +1663,7 @@
 
         return `
           <tr>
+            <td><input type="checkbox" class="check-pedido" data-id="${p.id}" value="${p.id}"></td>
             <td><strong>#${p.numeroPedido || '---'}</strong></td>
             <td>${p.clienteNome || 'Cliente'}<br><small style="color:#64748b;">${p.formaPgto || ''}</small></td>
             <td>R$ ${parseFloat(p.total || 0).toFixed(2)}</td>
@@ -1021,8 +1673,10 @@
               </span>
             </td>
             <td>
-              <button class="btn" style="width:auto; padding:4px 8px; font-size:0.75rem; background:#2563eb; margin-bottom:2px;" onclick="abrirModalNota('${p.id}')">📄 Recibo</button>
-              <button class="btn-danger" title="Excluir Pedido" onclick="excluirPedido('${p.id}', ${p.numeroPedido || 0}, ${p.totalOvos || 0})">🗑️</button>
+              <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                <button class="btn" style="width:auto; padding:4px 6px; font-size:0.7rem; background:#2563eb;" onclick="abrirModalNota('${p.id}')">📄 Recibo</button>
+                <button class="btn-danger" style="font-size:0.7rem; padding:4px 6px;" onclick="excluirPedido('${p.id}', ${p.numeroPedido || 0}, ${p.totalOvos || 0})">❌ Cancelar</button>
+              </div>
             </td>
           </tr>
         `;
@@ -1035,9 +1689,8 @@
     }
 
     async function excluirPedido(id, numero, totalOvosDoPedido) {
-      if (!confirm(`Tem certeza que deseja excluir o Pedido #${numero || ''}? Os ovos deste pedido retornarão ao estoque.`)) return;
+      if (!confirm(`Tem certeza que deseja cancelar e excluir o Pedido #${numero || ''}? Os ovos deste pedido retornarão ao estoque.`)) return;
       try {
-        // Devolve os ovos ao estoque geral
         const refEstoque = db.collection("estoque_geral").doc("saldo");
         await db.runTransaction(async (transaction) => {
           const doc = await transaction.get(refEstoque);
@@ -1046,12 +1699,150 @@
           transaction.set(refEstoque, { qtdOvos: atual + devolucao }, { merge: true });
         });
 
-        // Apaga o pedido
         await db.collection("pedidos").doc(id).delete();
-        alert(`Pedido #${numero || ''} excluído e ${totalOvosDoPedido || 0} ovos repostos ao estoque com sucesso!`);
+        alert(`Pedido #${numero || ''} cancelado e excluído com sucesso!`);
       } catch (err) {
         alert("Erro ao excluir o pedido: " + err.message);
       }
+    }
+
+    function alternarTodosPedidos(master) {
+      document.querySelectorAll('.check-pedido').forEach(cb => cb.checked = master.checked);
+    }
+
+    function preVisualizarRecibosSelecionados() {
+      const checkboxes = document.querySelectorAll('.check-pedido:checked');
+      const selecionados = Array.from(new Set(Array.from(checkboxes).map(cb => cb.getAttribute('data-id') || cb.value)));
+      if (selecionados.length === 0) { alert('Selecione pelo menos um pedido!'); return; }
+      
+      const emp = state.empresa || {};
+      let htmlPaginas = '';
+      
+      selecionados.forEach((id) => {
+        const ped = state.pedidos.find(p => p.id === id);
+        if (ped) {
+          htmlPaginas += construirHtmlReciboMetade(ped, emp);
+        }
+      });
+
+      abrirJanelaImpressaoOtimizada(htmlPaginas);
+    }
+
+    function construirHtmlReciboMetade(ped, emp) {
+      const itens = ped.itens || [];
+      const nomeEmpresa = emp.nome || 'RANCHO UK';
+      const cnpjEmpresa = emp.cnpj || 'N/I';
+      const telEmpresa = emp.tel || 'N/I';
+      const endEmpresa = emp.end || 'N/I';
+
+      return `
+        <div class="recibo-bloco-metade">
+          <div>
+            <div class="recibo-sheet-header">
+              <h3 style="font-size:0.75rem; font-weight:800; text-transform:uppercase;">PEDIDO #${ped.numeroPedido || '---'}</h3>
+              <span style="font-size:0.7rem; font-weight:600;">${nomeEmpresa}</span>
+            </div>
+            <div style="font-size:0.7rem; margin-bottom:1px;"><strong>Cliente:</strong> ${ped.clienteNome || 'Cliente'}</div>
+            <div style="font-size:0.7rem; margin-bottom:2px;"><strong>Endereço:</strong> ${ped.clienteEnd || 'Não informado'}</div>
+            <hr class="dashed-divider">
+            <div style="font-size:0.6rem; font-weight:800; color:#64748b; text-transform:uppercase; margin-bottom:1px;">ITENS DO PEDIDO</div>
+            <div>
+              ${itens.map(i => `<div class="item-linha-zebrado"><span>${i.qtd}x${i.nome}</span><span>R$ ${parseFloat(i.subtotal || 0).toFixed(2)}</span></div>`).join('')}
+            </div>
+          </div>
+          <div>
+            <hr class="dashed-divider">
+            <div style="display:flex; justify-content:space-between; font-weight:800; font-size:0.8rem; color:#0f172a; margin-bottom:2px;">
+              <span>TOTAL:</span>
+              <span style="color:#2563eb;">R$ ${parseFloat(ped.total || 0).toFixed(2)}</span>
+            </div>
+            <div style="font-size:0.65rem; color:#475569; margin-bottom:2px;"><strong>Pgto:</strong> ${ped.formaPgto || 'Pix'} | <strong>Status:</strong> ${ped.status || 'Pendente'}</div>
+            <div style="background:#f8fafc; border-top:1px solid #e2e8f0; padding-top:2px; text-align:center; font-size:0.6rem; color:#64748b;">
+              <strong>${nomeEmpresa}</strong> | CNPJ: ${cnpjEmpresa} | Tel: ${telEmpresa} | ${endEmpresa}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function abrirJanelaImpressaoOtimizada(htmlConteudo) {
+      const ua = navigator.userAgent;
+      const isMobileChrome = /CriOS/.test(ua) || (/Android/.test(ua) && /Chrome/.test(ua));
+
+      if (isMobileChrome) {
+        const novaJanela = window.open('', '_blank');
+        if (novaJanela) {
+          novaJanela.document.write(`
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+            <head>
+              <meta charset="UTF-8">
+              <title>Recibo / Impressão</title>
+              <style>
+                @page { size: A4; margin: 5mm; }
+                * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+                body { background: #ffffff !important; color: #0f172a; padding: 5px; }
+                .recibo-bloco-metade { width: 100%; background: #ffffff; border: 1px dashed #94a3b8; border-radius: 6px; padding: 8px; margin-bottom: 12px; page-break-inside: avoid !important; break-inside: avoid !important; }
+                .recibo-sheet-header { background: #0f172a; color: #ffffff; padding: 6px 10px; border-radius: 4px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+                .dashed-divider { border: none; border-top: 1px dashed #cbd5e1; margin: 6px 0; }
+                .item-linha-zebrado { display: flex; justify-content: space-between; font-size: 0.75rem; padding: 4px 6px; }
+              </style>
+            </head>
+            <body>
+              ${htmlConteudo}
+              <script>setTimeout(() => { window.print(); }, 350);<\/script>
+            </body>
+            </html>
+          `);
+          novaJanela.document.close();
+        } else {
+          alert("Por favor, permita que o navegador abra pop-ups para gerar o recibo.");
+        }
+        return;
+      }
+
+      let iframe = document.getElementById('iframe-impressao-direta');
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.id = 'iframe-impressao-direta';
+        iframe.style.position = 'fixed';
+        iframe.style.right = '0';
+        iframe.style.bottom = '0';
+        iframe.style.width = '0px';
+        iframe.style.height = '0px';
+        iframe.style.border = '0px';
+        document.body.appendChild(iframe);
+      }
+
+      const docHtml = `
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+        <head>
+          <meta charset="UTF-8">
+          <title>Impressão</title>
+          <style>
+            @page { size: A4; margin: 4mm; }
+            * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+            html, body { background: #ffffff !important; color: #0f172a; width: 100%; height: 100%; padding: 0; margin: 0; }
+            .recibo-bloco-metade { width: 100%; background: #ffffff; border: 1px dashed #94a3b8; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; display: flex; flex-direction: column; justify-content: space-between; page-break-inside: avoid; break-inside: avoid; }
+            .recibo-sheet-header { background: #0f172a; color: #ffffff; padding: 4px 8px; border-radius: 4px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
+            .dashed-divider { border: none; border-top: 1px dashed #cbd5e1; margin: 4px 0; }
+            .item-linha-zebrado { display: flex; justify-content: space-between; font-size: 0.72rem; padding: 3px 6px; border-radius: 4px; }
+          </style>
+        </head>
+        <body>${htmlConteudo}</body>
+        </html>
+      `;
+
+      const doc = iframe.contentWindow.document;
+      doc.open();
+      doc.write(docHtml);
+      doc.close();
+
+      setTimeout(() => {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+      }, 150);
     }
 
     // --- USUÁRIOS E EMPRESA ---
@@ -1253,47 +2044,85 @@
       window.open(link, '_blank');
     }
 
-    function abrirResumoVendasDia() {
-      const hojeStr = new Date().toDateString();
-      const pedidosHoje = state.pedidos.filter(p => {
-        let d = p.dataCriacao;
-        return d && d.toDateString && d.toDateString() === hojeStr;
-      });
-
-      const totalHoje = pedidosHoje.reduce((acc, p) => acc + (p.total || 0), 0);
-      const qtdPedidos = pedidosHoje.length;
-      const ticketMedio = qtdPedidos > 0 ? (totalHoje / qtdPedidos) : 0;
-
-      const porForma = {};
-      pedidosHoje.forEach(p => {
-        const forma = p.formaPgto || 'Não especificada';
-        porForma[forma] = (porForma[forma] || 0) + (p.total || 0);
-      });
-
-      document.getElementById('resumo-data-hoje').innerText = `Data: ${new Date().toLocaleDateString('pt-BR')}`;
-      document.getElementById('resumo-total-hoje').innerText = `R$ ${totalHoje.toFixed(2)}`;
-      document.getElementById('resumo-qtd-pedidos').innerText = qtdPedidos;
-      document.getElementById('resumo-ticket-medio').innerText = `R$ ${ticketMedio.toFixed(2)}`;
-
-      const htmlFormas = Object.keys(porForma).map(f => `
-        <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
-          <span>${f}:</span>
-          <strong>R$ ${porForma[f].toFixed(2)}</strong>
-        </div>
-      `).join('');
-      document.getElementById('resumo-detalhe-formas').innerHTML = htmlFormas || 'Nenhuma venda hoje.';
-
-      const tbody = document.getElementById('resumo-tabela-hoje');
-      tbody.innerHTML = pedidosHoje.map(p => `
-        <tr>
-          <td>#${p.numeroPedido || ''}</td>
-          <td>${p.clienteNome}</td>
-          <td>R$ ${parseFloat(p.total).toFixed(2)}</td>
-          <td><span class="badge ${p.status === 'Pago' ? 'badge-pago' : 'badge-pendente'}">${p.status}</span></td>
-        </tr>
-      `).join('');
-
+    // --- RELATÓRIOS E RESUMOS DE VENDAS ---
+    function abrirResumoVendas() {
+      document.getElementById('filtro-periodo').value = 'hoje';
+      atualizarFiltroRelatorio();
       document.getElementById('modal-resumo').style.display = 'flex';
+    }
+
+    function atualizarFiltroRelatorio() {
+      const tipo = document.getElementById('filtro-periodo').value;
+      document.getElementById('container-datas-personalizadas').style.display = (tipo === 'personalizado') ? 'grid' : 'none';
+      renderizarDadosRelatorio();
+    }
+
+    function renderizarDadosRelatorio() {
+      const tipo = document.getElementById('filtro-periodo').value;
+      const agora = new Date();
+      let pedidosFiltrados = state.pedidos;
+      document.getElementById('relatorio-data-emissao').innerText = "Emitido em: " + agora.toLocaleDateString('pt-BR') + " " + agora.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+      if (tipo === 'hoje') {
+        pedidosFiltrados = state.pedidos.filter(p => {
+          const d = p.dataCriacao ? new Date(p.dataCriacao) : new Date();
+          return d.toDateString() === agora.toDateString();
+        });
+      } else if (tipo === 'semana') {
+        const limite = new Date(); limite.setDate(agora.getDate() - 7); limite.setHours(0,0,0,0);
+        pedidosFiltrados = state.pedidos.filter(p => {
+          const d = p.dataCriacao ? new Date(p.dataCriacao) : new Date();
+          return d >= limite;
+        });
+      } else if (tipo === 'mes') {
+        pedidosFiltrados = state.pedidos.filter(p => {
+          const d = p.dataCriacao ? new Date(p.dataCriacao) : new Date();
+          return d.getMonth() === agora.getMonth() && d.getFullYear() === agora.getFullYear();
+        });
+      } else if (tipo === 'personalizado') {
+        const dataInicio = document.getElementById('data-inicio').value;
+        const dataFim = document.getElementById('data-fim').value;
+        if (dataInicio && dataFim) {
+          const ini = new Date(dataInicio + 'T00:00:00');
+          const fim = new Date(dataFim + 'T23:59:59');
+          pedidosFiltrados = state.pedidos.filter(p => {
+            const d = p.dataCriacao ? new Date(p.dataCriacao) : new Date();
+            return d >= ini && d <= fim;
+          });
+        } else {
+          pedidosFiltrados = [];
+        }
+      }
+
+      const totalPeriodo = pedidosFiltrados.reduce((acc, p) => acc + (parseFloat(p.total) || 0), 0);
+      document.getElementById('resumo-total-periodo').innerText = "R$ " + totalPeriodo.toFixed(2);
+      document.getElementById('resumo-qtd-pedidos').innerText = pedidosFiltrados.length;
+
+      const formas = {};
+      pedidosFiltrados.forEach(p => { const pgto = p.formaPgto || 'Outros'; formas[pgto] = (formas[pgto] || 0) + (parseFloat(p.total) || 0); });
+      document.getElementById('resumo-detalhe-formas').innerHTML = Object.keys(formas).map(f => "• " + f + ": <strong>R$ " + formas[f].toFixed(2) + "</strong>").join('<br>') || 'Nenhum registro no período.';
+
+      document.getElementById('resumo-tabela-periodo').innerHTML = pedidosFiltrados.length > 0 ? pedidosFiltrados.map(p => `
+        <tr><td>#${p.numeroPedido || '---'}</td><td>${new Date(p.dataCriacao).toLocaleDateString('pt-BR')}</td><td>${p.clienteNome || 'Cliente'}</td><td>R$ ${parseFloat(p.total || 0).toFixed(2)}</td><td>${p.status || 'Pendente'}</td></tr>
+      `).join('') : '<tr><td colspan="5" style="text-align:center; color:#64748b;">Nenhum pedido encontrado neste período.</td></tr>';
+    }
+
+    function imprimirRelatorioDireto() {
+      const conteudoHtml = document.getElementById('area-relatorio-impressao').outerHTML;
+      document.getElementById('modal-resumo').style.display = 'none';
+      abrirJanelaImpressaoOtimizada(conteudoHtml);
+    }
+
+    function exportarRelatorioExcel() {
+      let csv = "Pedido;Data;Cliente;Total;Status\n";
+      state.pedidos.forEach(p => {
+        csv += "#" + (p.numeroPedido || '') + ";" + p.dataCriacao.toLocaleDateString('pt-BR') + ";\"" + (p.clienteNome || '') + "\";R$ " + (p.total || 0).toFixed(2).replace('.', ',') + ";" + (p.status || '') + "\n";
+      });
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'relatorio_vendas.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
 
     // Inicialização da Aplicação

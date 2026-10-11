@@ -194,16 +194,18 @@
       align-items: center;
       border-bottom: 3px solid #2563eb;
     }
+    .relatorio-sheet-header h3 { font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
     .relatorio-kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
     .relatorio-kpi-item { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; padding: 10px; border-radius: 6px; }
     .relatorio-kpi-label { font-size: 0.65rem; color: #64748b; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; }
     .relatorio-kpi-val { font-size: 1.1rem; font-weight: 800; color: #0f172a; }
     .relatorio-section-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.82rem; }
     .relatorio-tabela-planilha { width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 0.8rem; }
-    .relatorio-tabela-planilha th { background: #eff6ff; color: #1e40af; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; padding: 8px 6px; border-bottom: 2px solid #bfdbfe; }
+    .relatorio-tabela-planilha th { background: #eff6ff; color: #1e40af; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; padding: 8px 6px; border-bottom: 2px solid #bfdbfe; border-top: 1px solid #e2e8f0; }
     .relatorio-tabela-planilha td { padding: 8px 6px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+    .relatorio-tabela-planilha tr:nth-child(even) { background-color: #f8fafc; }
 
-    /* CORREÇÃO DE IMPRESSÃO */
+    /* CORREÇÃO DE IMPRESSÃO DE NOTAS INDIVIDUAIS */
     @media print {
       body {
         background: #ffffff !important;
@@ -1786,6 +1788,20 @@
                 .recibo-sheet-header { background: #0f172a; color: #ffffff; padding: 6px 10px; border-radius: 4px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
                 .dashed-divider { border: none; border-top: 1px dashed #cbd5e1; margin: 6px 0; }
                 .item-linha-zebrado { display: flex; justify-content: space-between; font-size: 0.75rem; padding: 4px 6px; }
+
+                /* ESTILOS DOS RELATÓRIOS (VENDAS E TÉCNICO) */
+                .relatorio-sheet-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; color: #0f172a; width: 100%; box-sizing: border-box; }
+                .relatorio-sheet-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 14px 16px; border-radius: 8px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #2563eb; }
+                .relatorio-sheet-header h3 { font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+                .relatorio-kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
+                .relatorio-kpi-item { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; padding: 10px; border-radius: 6px; }
+                .relatorio-kpi-label { font-size: 0.65rem; color: #64748b; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; }
+                .relatorio-kpi-val { font-size: 1.1rem; font-weight: 800; color: #0f172a; }
+                .relatorio-section-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.82rem; }
+                .relatorio-tabela-planilha { width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 0.8rem; }
+                .relatorio-tabela-planilha th { background: #eff6ff; color: #1e40af; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; padding: 8px 6px; border-bottom: 2px solid #bfdbfe; border-top: 1px solid #e2e8f0; }
+                .relatorio-tabela-planilha td { padding: 8px 6px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+                .relatorio-tabela-planilha tr:nth-child(even) { background-color: #f8fafc; }
               </style>
             </head>
             <body>
@@ -1796,7 +1812,7 @@
           `);
           novaJanela.document.close();
         } else {
-          alert("Por favor, permita que o navegador abra pop-ups para gerar o recibo.");
+          alert("Por favor, permita que o navegador abra pop-ups para gerar a impressão.");
         }
         return;
       }
@@ -1824,10 +1840,25 @@
             @page { size: A4; margin: 4mm; }
             * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
             html, body { background: #ffffff !important; color: #0f172a; width: 100%; height: 100%; padding: 0; margin: 0; }
+            
             .recibo-bloco-metade { width: 100%; background: #ffffff; border: 1px dashed #94a3b8; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; display: flex; flex-direction: column; justify-content: space-between; page-break-inside: avoid; break-inside: avoid; }
             .recibo-sheet-header { background: #0f172a; color: #ffffff; padding: 4px 8px; border-radius: 4px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
             .dashed-divider { border: none; border-top: 1px dashed #cbd5e1; margin: 4px 0; }
             .item-linha-zebrado { display: flex; justify-content: space-between; font-size: 0.72rem; padding: 3px 6px; border-radius: 4px; }
+
+            /* ESTILOS DOS RELATÓRIOS (VENDAS E TÉCNICO) */
+            .relatorio-sheet-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; color: #0f172a; width: 100%; box-sizing: border-box; }
+            .relatorio-sheet-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 14px 16px; border-radius: 8px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #2563eb; }
+            .relatorio-sheet-header h3 { font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+            .relatorio-kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
+            .relatorio-kpi-item { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; padding: 10px; border-radius: 6px; }
+            .relatorio-kpi-label { font-size: 0.65rem; color: #64748b; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; }
+            .relatorio-kpi-val { font-size: 1.1rem; font-weight: 800; color: #0f172a; }
+            .relatorio-section-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-size: 0.82rem; }
+            .relatorio-tabela-planilha { width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 0.8rem; }
+            .relatorio-tabela-planilha th { background: #eff6ff; color: #1e40af; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; padding: 8px 6px; border-bottom: 2px solid #bfdbfe; border-top: 1px solid #e2e8f0; }
+            .relatorio-tabela-planilha td { padding: 8px 6px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+            .relatorio-tabela-planilha tr:nth-child(even) { background-color: #f8fafc; }
           </style>
         </head>
         <body>${htmlConteudo}</body>
